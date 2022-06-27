@@ -14,7 +14,6 @@ interface userState {
 	isLoading: boolean;
 	signUpError: string;
 	signInError: string;
-	successMessage: string;
 }
 const initialState: userState = {
 	isSignedIn: false,
@@ -22,7 +21,6 @@ const initialState: userState = {
 	isLoading: false,
 	signUpError: '',
 	signInError: '',
-	successMessage: '',
 };
 
 // async actions
@@ -41,7 +39,7 @@ export const signInWithEmailAndPassword = createAsyncThunk(
 			formFields.email,
 			formFields.password
 		);
-		
+
 		return JSON.stringify(user);
 	}
 );

@@ -44,7 +44,7 @@ const SignUp = () => {
 			.unwrap()
 			.then(() => {
 				resetFormFields();
-				navigate('/app');
+				navigate('/');
 			})
 			.catch((error) => {
 				resetFormFields();
@@ -74,7 +74,7 @@ const SignUp = () => {
 									htmlFor="name"
 									className="block text-sm font-medium font-color"
 								>
-									Name
+									Company Name
 								</label>
 								<div className="mt-2">
 									<input
@@ -85,7 +85,7 @@ const SignUp = () => {
 										type="text"
 										autoComplete="current-name"
 										required
-										placeholder="Enter your name"
+										placeholder="Enter your company name"
 										className="primary-bg-color block w-full px-5 py-3 text-base text-neutral-400 placeholder-gray-400 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-100 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
 									/>
 								</div>

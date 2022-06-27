@@ -104,13 +104,14 @@ export const createCompanyDocument = async (
 
 	// if user doc doesn't exist, will create one in collection
 	if (!companySnapShot.exists()) {
-		const { email } = authUser;
+		const { email, displayName } = authUser;
 		const createdAt = new Date();
 
 		try {
 			await setDoc(companyDocRef, {
 				id: authUser.uid,
-				company: '',
+				createdAt,
+				company: displayName,
 				companyUrl: '',
 				email,
 				isHiring: false,
@@ -119,7 +120,7 @@ export const createCompanyDocument = async (
 				jobs: [],
 			});
 		} catch (error) {
-			console.log('get user auth and create doc', error);
+			console.log('error with get user auth and create doc', error);
 		}
 		return companySnapShot as QueryDocumentSnapshot<CompanyData>;
 	}
