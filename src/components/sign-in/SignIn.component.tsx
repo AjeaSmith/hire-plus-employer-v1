@@ -35,7 +35,7 @@ const SignIn = () => {
 			.unwrap()
 			.then(() => {
 				resetFormFields();
-				navigate('/app');
+				navigate('/');
 			})
 			.catch((error) => {
 				resetFormFields();

@@ -1,19 +1,20 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import PrivateRoute from './components/private/PrivateRoute.component';
 import SignIn from './components/sign-in/SignIn.component';
 import SignUp from './components/sign-up/SignUp.component';
 import AuthPage from './routes/auth/AuthPage';
 import CandidatesPage from './routes/candidates/CandidatesPage';
+import CompanyPage from './routes/company/CompanyPage';
 import HomePage from './routes/home/HomePage';
 import { setSignedIn } from './store/features/auth/authSlice';
 import { useAppDispatch } from './store/hooks';
-import { getCurrentUser } from './utils/firebase.utils';
+import { onAuthStateChangedListener } from './utils/firebase.utils';
 
 function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
-		const getUser = async () => {
-			const user = await getCurrentUser();
+		const unsubscribe = onAuthStateChangedListener(async (user) => {
 			if (user) {
 				const { displayName, uid } = user;
 				dispatch(
@@ -22,8 +23,9 @@ function App() {
 			} else {
 				dispatch(setSignedIn({ signedIn: false, currentUser: {} }));
 			}
-		};
-		getUser();
+		});
+		// unsubscribe when the component unmounts
+		return unsubscribe;
 	}, []);
 	return (
 		<>
@@ -34,14 +36,14 @@ function App() {
 						<Route index element={<SignIn />} />
 						<Route path="sign-up" element={<SignUp />} />
 					</Route>
-					{/* <Route
-						path="user/profile/:id"
+					<Route
+						path="company/profile/:id"
 						element={
 							<PrivateRoute>
-								<ProfilePage />
+								<CompanyPage />
 							</PrivateRoute>
 						}
-					/> */}
+					/>
 				</Route>
 				{/* <Route path="*" element={<NoMatch />} /> */}
 			</Routes>

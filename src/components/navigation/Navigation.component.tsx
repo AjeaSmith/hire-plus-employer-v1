@@ -10,7 +10,7 @@ const Navigation = () => {
 
 	const logout = () => {
 		try {
-			dispatch(signoutUser()).then(() => {
+			dispatch(signoutUser()).unwrap().then(() => {
 				navigate('auth/employers');
 			});
 		} catch (error) {
@@ -40,7 +40,7 @@ const Navigation = () => {
 								Candidates
 							</Link>
 							<Link
-								to={`user/profile/${currentUser.uid}`}
+								to={`company/profile/${currentUser.uid}`}
 								className="mr-5 hover:text-gray-500"
 							>
 								Company Profile
