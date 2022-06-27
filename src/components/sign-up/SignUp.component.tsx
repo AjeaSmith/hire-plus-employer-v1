@@ -1,5 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router';
 import BeatLoader from 'react-spinners/BeatLoader';
+import {
+	setSignupError,
+	signUpUserEmailAndPassword,
+} from '../../store/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const defaultFormFields = {
 	displayName: '',
@@ -8,6 +14,10 @@ const defaultFormFields = {
 	confirmPassword: '',
 };
 const SignUp = () => {
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
+	const { isLoading, signUpError } = useAppSelector((state) => state.auth);
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, password, displayName, confirmPassword } = formFields;
 
@@ -21,9 +31,24 @@ const SignUp = () => {
 	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		if (password !== confirmPassword) {
-			// dispatch(setSignupError('Passwords must match'));
-			// return;
+			dispatch(setSignupError('Passwords must match'));
+			return;
 		}
+		dispatch(
+			signUpUserEmailAndPassword({
+				email,
+				password,
+				displayName,
+			})
+		)
+			.unwrap()
+			.then(() => {
+				resetFormFields();
+				navigate('/app');
+			})
+			.catch((error) => {
+				resetFormFields();
+			});
 	};
 	return (
 		<div className="items-center px-5 mt-5">
@@ -37,13 +62,13 @@ const SignUp = () => {
 							Sign up with your email and password
 						</p>
 					</div>
-					{/* {signUpError && (
+					{signUpError && (
 						<div className="text-center text-red-600 mb-5 text-lg">
 							{signUpError}
 						</div>
-					)} */}
+					)}
 					<div>
-						<form className="space-y-6">
+						<form onSubmit={handleSubmit} className="space-y-6">
 							<div>
 								<label
 									htmlFor="name"
@@ -138,14 +163,13 @@ const SignUp = () => {
 									type="submit"
 									className="bg-indigo-700 flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
 								>
-									{/* {isLoading ? (
+									{isLoading ? (
 										<div className="text-center z-index">
 											<BeatLoader color={'white'} loading={true} />
 										</div>
 									) : (
 										<p>Sign up</p>
-									)} */}
-									Sign up
+									)}
 								</button>
 							</div>
 						</form>
