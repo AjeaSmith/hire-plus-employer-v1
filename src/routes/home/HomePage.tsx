@@ -1,9 +1,16 @@
 import React from 'react';
+import { Outlet } from 'react-router';
+import Navigation from '../../components/navigation/Navigation.component';
 
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
-	return <div>Im the home</div>;
+	return (
+		<>
+			<Navigation />
+			<Outlet />
+		</>
+	);
 };
 
 export default HomePage;
