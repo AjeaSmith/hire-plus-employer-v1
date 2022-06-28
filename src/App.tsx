@@ -7,6 +7,7 @@ import AuthPage from './routes/auth/AuthPage';
 import CandidatesPage from './routes/candidates/CandidatesPage';
 import CompanyPage from './routes/company/CompanyPage';
 import HomePage from './routes/home/HomePage';
+import NoMatch from './routes/noMatch/NoMatch';
 import { setSignedIn } from './store/features/auth/authSlice';
 import { useAppDispatch } from './store/hooks';
 import { onAuthStateChangedListener } from './utils/firebase.utils';
@@ -45,7 +46,7 @@ function App() {
 						}
 					/>
 				</Route>
-				{/* <Route path="*" element={<NoMatch />} /> */}
+				<Route path="*" element={<NoMatch />} />
 			</Routes>
 		</>
 	);

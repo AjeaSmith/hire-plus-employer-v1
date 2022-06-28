@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signoutUser } from '../../store/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -10,9 +9,11 @@ const Navigation = () => {
 
 	const logout = () => {
 		try {
-			dispatch(signoutUser()).unwrap().then(() => {
-				navigate('auth/employers');
-			});
+			dispatch(signoutUser())
+				.unwrap()
+				.then(() => {
+					navigate('auth/employers');
+				});
 		} catch (error) {
 			console.log('from logout', error);
 		}

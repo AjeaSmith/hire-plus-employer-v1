@@ -1,5 +1,11 @@
+import Company from '../../components/company/Company.component';
+
 const CompanyPage = () => {
-	return <div>Im teh company</div>;
+	return (
+		<>
+			<Company />
+		</>
+	);
 };
 
 export default CompanyPage;

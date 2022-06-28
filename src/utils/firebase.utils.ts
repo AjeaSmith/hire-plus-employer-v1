@@ -30,6 +30,7 @@ import {
 // } from '../../app/features/profile/profileTypes';
 // import { JobData } from '../../app/features/job/jobTypes';
 import { SignUpFields } from '../store/features/auth/authTypes';
+import { CompanyData } from '../store/features/company/companyTypes';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCg113wgJGlfL1T8B7SwVSO6a-UezmyAas',
 	authDomain: 'hireplus-268ed.firebaseapp.com',
@@ -50,16 +51,6 @@ googleProvider.setCustomParameters({
 
 type AdditionalInfo = {
 	displayName?: string;
-};
-type CompanyData = {
-	id: string;
-	company: string;
-	companyUrl: string;
-	email: string;
-	isHiring: boolean;
-	companySize: string;
-	companyType: string;
-	jobs: [];
 };
 
 // Firebase setup
@@ -131,23 +122,10 @@ export const logoutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
 	onAuthStateChanged(auth, callback);
 
-export const getCurrentUser = (): Promise<User | null> => {
-	return new Promise((resolve, reject) => {
-		const unsubscribe = onAuthStateChanged(
-			auth,
-			(userAuth) => {
-				unsubscribe();
-				resolve(userAuth);
-			},
-			reject
-		);
-	});
-};
-
 // ----------- PROFILE API ----------------------------
 
 export const getCompany = async (id: string): Promise<CompanyData[]> => {
-	const collectionRef = collection(db, 'employees');
+	const collectionRef = collection(db, 'employers');
 	const q = query(collectionRef, where('id', '==', id));
 
 	const querySnapshot = await getDocs(q);
