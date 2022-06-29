@@ -1,6 +1,7 @@
 export type CompanyData = {
 	id: string;
-	company: string;
+	companyName: string;
+	companyDescription: string;
 	companyUrl: string;
 	email: string;
 	isHiring: boolean;

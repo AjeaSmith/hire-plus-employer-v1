@@ -102,7 +102,8 @@ export const createCompanyDocument = async (
 			await setDoc(companyDocRef, {
 				id: authUser.uid,
 				createdAt,
-				company: displayName,
+				companyName: displayName,
+				companyDescription: '',
 				companyUrl: '',
 				email,
 				isHiring: false,
