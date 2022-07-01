@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Signup from './auth/sign-up/SignUp.component';
 import PrivateRoute from './components/private/PrivateRoute.component';
-import SignIn from './components/sign-in/SignIn.component';
+import SignIn from './auth/sign-in/Signin.component';
 import AuthPage from './routes/auth/AuthPage';
 import CandidatesPage from './routes/candidates/CandidatesPage';
 import CompanyPage from './routes/company/CompanyPage';

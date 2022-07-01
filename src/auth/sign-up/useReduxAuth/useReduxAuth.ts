@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
-import { signUpUserEmailAndPassword } from '../../store/features/auth/authSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { FormFields } from './types';
+import { signUpUserEmailAndPassword } from '../../../store/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { FormFields } from '../types';
 
 const useReduxAuth = () => {
 	const dispatch = useAppDispatch();

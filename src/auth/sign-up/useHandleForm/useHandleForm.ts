@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import useReduxAuth from './useReduxAuth';
+import useReduxAuth from '../useReduxAuth/useReduxAuth';
 
 const useHandleForm = () => {
 	const defaultFormFields = {
