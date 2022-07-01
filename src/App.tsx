@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Signup from './auth/sign-up/SignUp.component';
 import PrivateRoute from './components/private/PrivateRoute.component';
 import SignIn from './components/sign-in/SignIn.component';
-import SignUp from './components/sign-up/SignUp.component';
 import AuthPage from './routes/auth/AuthPage';
 import CandidatesPage from './routes/candidates/CandidatesPage';
 import CompanyPage from './routes/company/CompanyPage';
@@ -35,7 +35,7 @@ function App() {
 					<Route index element={<CandidatesPage />} />
 					<Route path="auth/employers" element={<AuthPage />}>
 						<Route index element={<SignIn />} />
-						<Route path="sign-up" element={<SignUp />} />
+						<Route path="sign-up" element={<Signup />} />
 					</Route>
 					<Route
 						path="company/profile/:id"
