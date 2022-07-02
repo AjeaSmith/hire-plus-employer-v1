@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
-	resetError,
 	signInWithEmailAndPassword,
 	signInWithGoogle,
-} from '../../../../store/features/auth/authSlice';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { FormFields } from '../../types';
+	signUpUserEmailAndPassword,
+} from '../../store/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { FormFields, LoginFields } from '../types';
 
 const useReduxAuth = () => {
 	const dispatch = useAppDispatch();
@@ -15,12 +15,25 @@ const useReduxAuth = () => {
 	const { isLoading } = useAppSelector((state) => state.auth);
 	const [message, setmessage] = useState<string>('');
 
-	const dispatchSignInUser = ({ email, password }: FormFields) => {
+	const dispatchSignUpUser = ({ displayName, email, password }: FormFields) => {
 		dispatch(
-			signInWithEmailAndPassword({
+			signUpUserEmailAndPassword({
 				email,
 				password,
+				displayName,
 			})
+		)
+			.unwrap()
+			.then(() => {
+				navigate('/');
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+	const dispatchSignInUser = (loginFields: LoginFields) => {
+		dispatch(
+			signInWithEmailAndPassword(loginFields)
 		)
 			.unwrap()
 			.then(() => {
@@ -36,14 +49,19 @@ const useReduxAuth = () => {
 		dispatch(signInWithGoogle())
 			.unwrap()
 			.then(() => {
-				// resetFormFields();
 				navigate('/');
 			})
 			.catch((error) => {
-				dispatch(resetError());
+				console.log(error);
 			});
 	};
-	return { dispatchSignInUser, dispatchGoogleSignIn, isLoading, message };
+	return {
+		dispatchSignUpUser,
+		dispatchSignInUser,
+		isLoading,
+		message,
+		dispatchGoogleSignIn,
+	};
 };
 
 export default useReduxAuth;

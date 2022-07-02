@@ -1,9 +1,21 @@
 import BeatLoader from 'react-spinners/BeatLoader';
-import useHandleForm from './hooks/useHandleForm/useHandleForm';
-import useReduxAuth from './hooks/useReduxAuth/useReduxAuth';
+import useHandleForm from '../hooks/useHandleForms';
 
+import useReduxAuth from '../hooks/useReduxAuth';
+
+const loginFields = {
+	email: '',
+	password: '',
+};
 const SignIn = () => {
-	const { handleChange, handleSubmit, formFields } = useHandleForm();
+	const {
+		handleLoginChange,
+		handleSubmit,
+		loginInput,
+		message: formMessage,
+	} = useHandleForm({
+		loginFields,
+	});
 	const { dispatchGoogleSignIn, isLoading, message } = useReduxAuth();
 	return (
 		<div className="items-center px-5 mt-10">
@@ -22,8 +34,16 @@ const SignIn = () => {
 							{message}
 						</div>
 					)}
+					{formMessage && (
+						<div className="text-center text-red-600 mb-5 text-lg">
+							{formMessage}
+						</div>
+					)}
 					<div>
-						<form className="space-y-6" onSubmit={handleSubmit}>
+						<form
+							className="space-y-6"
+							onSubmit={(e) => handleSubmit(e, 'login')}
+						>
 							<div>
 								<label
 									htmlFor="email"
@@ -35,8 +55,8 @@ const SignIn = () => {
 								<div className="mt-2">
 									<input
 										id="email"
-										onChange={handleChange}
-										value={formFields.email}
+										onChange={handleLoginChange}
+										value={loginInput.email}
 										name="email"
 										type="email"
 										required
@@ -57,8 +77,8 @@ const SignIn = () => {
 									<input
 										id="password"
 										minLength={6}
-										onChange={handleChange}
-										value={formFields.password}
+										onChange={handleLoginChange}
+										value={loginInput.password}
 										name="password"
 										type="password"
 										data-testid="password"

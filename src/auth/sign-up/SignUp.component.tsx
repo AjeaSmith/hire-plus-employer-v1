@@ -1,9 +1,19 @@
 import BeatLoader from 'react-spinners/BeatLoader';
-import useHandleForm from './useHandleForm/useHandleForm';
-import useReduxAuth from './useReduxAuth/useReduxAuth';
+import useHandleForm from '../hooks/useHandleForms';
+import useReduxAuth from '../hooks/useReduxAuth';
+
+const registerFields = {
+	displayName: '',
+	email: '',
+	password: '',
+	confirmPassword: '',
+};
 
 const Signup = () => {
-	const { formFields, handleChange, handleSubmit, message } = useHandleForm();
+	const { registerInput, handleRegisterChange, handleSubmit, message } =
+		useHandleForm({
+			registerFields,
+		});
 	const { isLoading } = useReduxAuth();
 	return (
 		<div className="items-center px-5 mt-5">
@@ -23,7 +33,10 @@ const Signup = () => {
 						</div>
 					)}
 					<div>
-						<form onSubmit={handleSubmit} className="space-y-6">
+						<form
+							onSubmit={(e) => handleSubmit(e, 'register')}
+							className="space-y-6"
+						>
 							<div>
 								<label
 									htmlFor="name"
@@ -33,8 +46,8 @@ const Signup = () => {
 								</label>
 								<div className="mt-2">
 									<input
-										value={formFields.displayName}
-										onChange={handleChange}
+										value={registerInput.displayName}
+										onChange={handleRegisterChange}
 										id="name"
 										name="displayName"
 										type="text"
@@ -55,8 +68,8 @@ const Signup = () => {
 								</label>
 								<div className="mt-2">
 									<input
-										value={formFields.email}
-										onChange={handleChange}
+										value={registerInput.email}
+										onChange={handleRegisterChange}
 										id="email"
 										name="email"
 										type="email"
@@ -80,8 +93,8 @@ const Signup = () => {
 										id="password"
 										name="password"
 										type="password"
-										onChange={handleChange}
-										value={formFields.password}
+										onChange={handleRegisterChange}
+										value={registerInput.password}
 										minLength={6}
 										required
 										data-testid="pass"
@@ -103,8 +116,8 @@ const Signup = () => {
 										id="confirmPassword"
 										name="confirmPassword"
 										type="password"
-										onChange={handleChange}
-										value={formFields.confirmPassword}
+										onChange={handleRegisterChange}
+										value={registerInput.confirmPassword}
 										data-testid="confirmPass"
 										minLength={6}
 										required
