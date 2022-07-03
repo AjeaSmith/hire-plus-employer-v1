@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCompany } from '../../../utils/firebase.utils';
-import { CompanyData } from './companyTypes';
+import { getCompany, updateCompany } from '../../../utils/firebase.utils';
+import { CompanyData, UpdateCompany } from './companyTypes';
 
 interface companyState {
 	company: CompanyData;
@@ -17,7 +17,6 @@ const initialState: companyState = {
 		email: '',
 		isHiring: false,
 		companySize: '',
-		companyType: '',
 		jobs: [],
 	},
 	isLoading: false,
@@ -31,6 +30,12 @@ export const getCompanyById = createAsyncThunk(
 		const company = await getCompany(id);
 		const [companyObj] = company;
 		return JSON.stringify(companyObj);
+	}
+);
+export const updateCompanyById = createAsyncThunk(
+	'company/updateCompany',
+	async (data: UpdateCompany) => {
+		await updateCompany(data);
 	}
 );
 const companySlice = createSlice({

@@ -30,7 +30,10 @@ import {
 // } from '../../app/features/profile/profileTypes';
 // import { JobData } from '../../app/features/job/jobTypes';
 import { SignUpFields } from '../store/features/auth/authTypes';
-import { CompanyData } from '../store/features/company/companyTypes';
+import {
+	CompanyData,
+	UpdateCompany,
+} from '../store/features/company/companyTypes';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCg113wgJGlfL1T8B7SwVSO6a-UezmyAas',
 	authDomain: 'hireplus-268ed.firebaseapp.com',
@@ -123,7 +126,7 @@ export const logoutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
 	onAuthStateChanged(auth, callback);
 
-// ----------- PROFILE API ----------------------------
+// ----------- COMPANY API ----------------------------
 
 export const getCompany = async (id: string): Promise<CompanyData[]> => {
 	const collectionRef = collection(db, 'employers');
@@ -135,31 +138,23 @@ export const getCompany = async (id: string): Promise<CompanyData[]> => {
 	});
 };
 
-// export const updateCompanyById = async (data: UpdatedFields) => {
-// 	const {
-// 		id,
-// 		headline,
-// 		summary,
-// 		skills,
-// 		projects,
-// 		experience,
-// 		isForHire,
-// 		websiteURL,
-// 	} = data;
-// 	const docRef = doc(db, 'employees', id);
-// 	const currentDocSnap = await getDoc(docRef);
-// 	await updateDoc(docRef, {
-// 		isForHire: isForHire ? isForHire : currentDocSnap.data().isForHire,
-// 		websiteURL: websiteURL ? websiteURL : currentDocSnap.data().websiteURL,
-// 		headline: headline ? headline : currentDocSnap.data().headline,
-// 		summary: summary ? summary : currentDocSnap.data().summary,
-// 		skills: arrayUnion(...skills),
-// 		projects: arrayUnion(...projects),
-// 		experience: arrayUnion(...experience),
-// 	}).then(() => {
-// 		console.log('updated successfully');
-// 	});
-// };
+export const updateCompany = async (data: UpdateCompany) => {
+	const { id, companyDescription, companyUrl, isHiring, companySize, jobs } =
+		data;
+	const docRef = doc(db, 'employers', id);
+	const currentDocSnap = await getDoc(docRef);
+	await updateDoc(docRef, {
+		companyDescription: companyDescription
+			? companyDescription
+			: currentDocSnap.data().companyDescription,
+		companyUrl: companyUrl ? companyUrl : currentDocSnap.data().companyUrl,
+		isHiring: isHiring ? isHiring : currentDocSnap.data().isHiring,
+		companySize: companySize ? companySize : currentDocSnap.data().companySize,
+		jobs: arrayUnion(...jobs),
+	}).then(() => {
+		console.log('updated successfully');
+	});
+};
 
 // ----------- JOB API ----------------------------
 

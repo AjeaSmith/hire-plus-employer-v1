@@ -6,6 +6,14 @@ export type CompanyData = {
 	email: string;
 	isHiring: boolean;
 	companySize: string;
-	companyType: string;
+	jobs: [];
+};
+
+export type UpdateCompany = {
+	id: string;
+	companyDescription: string;
+	companyUrl: string;
+	isHiring: boolean;
+	companySize: string;
 	jobs: [];
 };

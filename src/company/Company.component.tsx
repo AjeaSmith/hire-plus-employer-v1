@@ -1,5 +1,5 @@
-import { setEdittingView } from '../../store/features/company/companySlice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setEdittingView } from '../store/features/company/companySlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const Company = () => {
 	const dispatch = useAppDispatch();
@@ -51,11 +51,6 @@ const Company = () => {
 												Company Website
 											</a>
 										</>
-									) : null}
-									{company.companyType ? (
-										<p className="text-base leading-relaxed font-color pr-2">
-											{company.companyType}
-										</p>
 									) : null}
 									{company.companySize ? (
 										<p className="text-base leading-relaxed font-color pr-2">
