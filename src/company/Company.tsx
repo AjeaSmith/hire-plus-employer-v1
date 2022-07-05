@@ -9,7 +9,7 @@ const Company = () => {
 	const settingEditView = () => {
 		dispatch(setEdittingView(!isEditting));
 	};
-
+	console.log(company.id);
 	return (
 		<>
 			{company && (
