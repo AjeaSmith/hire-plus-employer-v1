@@ -25,7 +25,9 @@ const Navigation = () => {
 					to="/"
 					className="flex title-font font-bold items-center mb-4 md:mb-0 text-md"
 				>
-					Hire <span className="mr-1 text-indigo-500">+Plus</span>
+					<a href="https://hire-plus-v1.vercel.app/">
+						Hire <span className="mr-1 text-indigo-500">+Plus</span>
+					</a>
 					<span className="pr-2">Employers</span>
 					{isSignedIn && currentUser.displayName ? (
 						<span className="border-l-2 border-gray-700 pl-2">
