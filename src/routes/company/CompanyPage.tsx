@@ -7,7 +7,7 @@ import { getCompanyById } from '../../store/features/company/companySlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const CompanyPage = () => {
-	const { id, user } = useParams();
+	const { id, userId } = useParams();
 	const dispatch = useAppDispatch();
 	const { isLoading, isEditting } = useAppSelector((state) => state.company);
 	useEffect(() => {
@@ -20,7 +20,7 @@ const CompanyPage = () => {
 					<BeatLoader color="#ffffff" />
 				</div>
 			) : (
-				<>{isEditting ? <EditCompany /> : <Company user={user} />}</>
+				<>{isEditting ? <EditCompany /> : <Company userId={userId} />}</>
 			)}
 		</>
 	);

@@ -2,9 +2,9 @@ import { setEdittingView } from '../store/features/company/companySlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 interface CompanyProps {
-	user: string;
+	userId: string;
 }
-const Company: React.FC<CompanyProps> = ({ user }) => {
+const Company: React.FC<CompanyProps> = ({ userId }) => {
 	const dispatch = useAppDispatch();
 	const { company, isEditting } = useAppSelector((state) => state.company);
 	const { currentUser } = useAppSelector((state) => state.auth);
@@ -26,7 +26,7 @@ const Company: React.FC<CompanyProps> = ({ user }) => {
 									<p>Not hiring at the moment</p>
 								)}
 							</div>
-							{currentUser.displayName !== company.companyName ? null : (
+							{currentUser.uid !== userId ? null : (
 								<button
 									onClick={settingEditView}
 									className="underline text-md text-indigo-500"
