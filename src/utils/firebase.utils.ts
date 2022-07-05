@@ -25,18 +25,12 @@ import {
 	updateProfile,
 	signOut,
 } from 'firebase/auth';
-// import {
-// 	ProfileData,
-// 	UpdatedFields,
-// } from '../../app/features/profile/profileTypes';
-// import { JobData } from '../../app/features/job/jobTypes';
 import { SignUpFields } from '../store/features/auth/authTypes';
 import {
 	CompanyData,
 	UpdateCompany,
 	Jobs,
 } from '../store/features/company/companyTypes';
-import { JobData } from '../company/jobs/types';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCg113wgJGlfL1T8B7SwVSO6a-UezmyAas',
 	authDomain: 'hireplus-268ed.firebaseapp.com',

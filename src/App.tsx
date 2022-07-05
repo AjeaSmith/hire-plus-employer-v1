@@ -18,6 +18,7 @@ function App() {
 		const unsubscribe = onAuthStateChangedListener(async (user) => {
 			if (user) {
 				const { displayName, uid } = user;
+				console.log(user);
 				dispatch(
 					setSignedIn({ signedIn: true, currentUser: { displayName, uid } })
 				);
@@ -37,14 +38,7 @@ function App() {
 						<Route index element={<SignIn />} />
 						<Route path="sign-up" element={<Signup />} />
 					</Route>
-					<Route
-						path="company/profile/:id"
-						element={
-							<PrivateRoute>
-								<CompanyPage />
-							</PrivateRoute>
-						}
-					/>
+					<Route path="company/profile/:id" element={<CompanyPage />} />
 				</Route>
 				<Route path="*" element={<NoMatch />} />
 			</Routes>
