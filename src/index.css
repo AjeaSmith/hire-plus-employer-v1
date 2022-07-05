@@ -69,11 +69,11 @@ h2 {
 }
 
 .nav-tabs .nav-link {
-	color: rgba(255, 255, 255, 0.66);
+	color: rgba(255, 255, 255, 0.605);
 }
 .nav-tabs .nav-link.active {
-	color: rgb(99 102 241 / var(--tw-text-opacity));
-	border-color: rgb(99 102 241 / var(--tw-text-opacity));
+	color: white;
+	border-color: #424456;
 }
 
 /* Hiring switch */

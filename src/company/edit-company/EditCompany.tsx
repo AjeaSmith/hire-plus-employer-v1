@@ -1,21 +1,32 @@
-import { setEdittingView } from '../../store/features/company/companySlice';
+import {
+	setEdittingView,
+	setJobs,
+} from '../../store/features/company/companySlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import useEditForm from './hooks/useEditForm';
+import AddJobModal from '../jobs/AddJobModal';
+import Job from '../jobs/Job';
+import useEditForm from './useEditForm';
 
 const EditCompany = () => {
 	const dispatch = useAppDispatch();
-	const { isEditting } = useAppSelector((state) => state.company);
+	const { isEditting, company } = useAppSelector((state) => state.company);
 	const { currentUser } = useAppSelector((state) => state.auth);
 	const {
 		formFields,
 		handleInputChange,
 		handleTextareaChange,
+		handleUpdateCompany,
 		isHiring,
-		companyHire,
+		toggleHireCompany,
+		openModal,
 	} = useEditForm();
 
 	const settingEditView = () => {
 		dispatch(setEdittingView(!isEditting));
+	};
+	const removeItem = (id: number) => {
+		const newJobs = company.jobs.filter((_, i) => i !== id);
+		dispatch(setJobs(newJobs));
 	};
 	return (
 		<>
@@ -23,7 +34,7 @@ const EditCompany = () => {
 				<div className="container mx-auto py-5 text-right text-white flex justify-end">
 					<div>
 						<button
-							// onClick={updateProfile}
+							onClick={handleUpdateCompany}
 							className="mr-2 text-lg text-indigo-500"
 						>
 							Update
@@ -48,7 +59,7 @@ const EditCompany = () => {
 									className="flex items-center cursor-pointer relative mb-4"
 								>
 									<input
-										onChange={companyHire}
+										onChange={toggleHireCompany}
 										checked={isHiring}
 										type="checkbox"
 										id="toggle-example"
@@ -66,7 +77,7 @@ const EditCompany = () => {
 								value={formFields.companyUrl}
 								onChange={handleInputChange}
 								name="companyUrl"
-								placeholder="Add company url..."
+								placeholder="Add company website"
 							/>
 						</div>
 					</div>
@@ -111,7 +122,7 @@ const EditCompany = () => {
 											name="companySize"
 											value={formFields.companySize}
 											onChange={handleInputChange}
-											placeholder="e.g. small, medium, large"
+											placeholder="e.g. 1-50"
 										></input>
 									</div>
 								</div>
@@ -121,35 +132,34 @@ const EditCompany = () => {
 					{/* Jobs starts */}
 					<section className="text-gray-600 body-font">
 						<div className="container px-5 py-24 mx-auto">
-							<div className="text-left mb-10">
+							<div className="text-left mb-5">
 								<h2 className="sm:text-3xl text-2xl font-bold title-font mb-5">
 									Jobs
 								</h2>
 								<button
-									// onClick={() => setIsProjOpen(true)}
+									onClick={openModal}
 									className="block text-white bg-indigo-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
 									type="button"
 									data-modal-toggle="defaultModal"
 								>
 									Add Job
 								</button>
-								{/* <ProjectPopupModal
-								isProjOpen={isProjOpen}
-								closeProjModal={closeProjModal}
-							/> */}
+								<AddJobModal />
 							</div>
+							<p className='mb-5 font-color'>Be sure to <b>'Update'</b> for these changes to take effect :)</p>
 							<div className="flex flex-wrap -m-4">
-								{/* {profile.projects.length
-								? profile.projects.map((project, index) => {
-										return (
-											<Project
-												project={project}
-												key={index}
-												itemIndex={index}
-											/>
-										);
-								  })
-								: null} */}
+								{company.jobs.length
+									? company.jobs.map((job, index) => {
+											return (
+												<Job
+													job={job}
+													key={index}
+													itemIndex={index}
+													removeItem={removeItem}
+												/>
+											);
+									  })
+									: null}
 							</div>
 						</div>
 					</section>

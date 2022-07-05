@@ -2,10 +2,12 @@ import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
 	setEdittingView,
+	setJobsDB,
+	setModal,
 	updateCompanyById,
-} from '../../../store/features/company/companySlice';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { EditFields } from '../types';
+} from '../../store/features/company/companySlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { EditFields } from './types';
 
 const useEditForm = () => {
 	const { company, isEditting } = useAppSelector((state) => state.company);
@@ -40,13 +42,16 @@ const useEditForm = () => {
 	};
 
 	// toggle editting view / hiring toggle
-	const companyHire = () => {
+	const toggleHireCompany = () => {
 		setIsHiring(!isHiring);
 	};
 	const settingEditView = () => {
 		dispatch(setEdittingView(!isEditting));
 	};
 
+	const openModal = () => {
+		dispatch(setModal(true));
+	};
 	// handle update company
 	const handleUpdateCompany = () => {
 		dispatch(
@@ -65,8 +70,10 @@ const useEditForm = () => {
 		isHiring,
 		handleInputChange,
 		handleTextareaChange,
-		companyHire,
+		toggleHireCompany,
 		settingEditView,
+		handleUpdateCompany,
+		openModal,
 	};
 };
 

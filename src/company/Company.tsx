@@ -9,6 +9,7 @@ const Company = () => {
 	const settingEditView = () => {
 		dispatch(setEdittingView(!isEditting));
 	};
+
 	return (
 		<>
 			{company && (
@@ -19,7 +20,7 @@ const Company = () => {
 								{company.isHiring ? (
 									<p>We are hiring!</p>
 								) : (
-									<p>Our company is not hiring at the moment</p>
+									<p>Not hiring at the moment</p>
 								)}
 							</div>
 							{currentUser.uid !== company.id ? null : (
@@ -43,18 +44,16 @@ const Company = () => {
 								/>
 								<div className="flex justify-center">
 									{company.companyUrl ? (
-										<>
-											<a
-												href={company.companyUrl}
-												className="text-base leading-relaxed text-indigo-500 border-l-2 border-gray-500 pl-2"
-											>
-												Company Website
-											</a>
-										</>
+										<a
+											href={company.companyUrl}
+											className="text-base leading-relaxed text-indigo-500 border-r-2 border-gray-500 pr-2"
+										>
+											Company Website
+										</a>
 									) : null}
 									{company.companySize ? (
-										<p className="text-base leading-relaxed font-color pr-2">
-											{company.companySize}
+										<p className="text-base leading-relaxed font-color pl-2">
+											Company size: {company.companySize}
 										</p>
 									) : null}
 								</div>
@@ -84,7 +83,6 @@ const Company = () => {
 								hover:border-transparent hover:bg-transparent
 								focus:border-transparent
 								active
-								
 								"
 								id="tabs-home-tabFill"
 								data-bs-toggle="pill"
@@ -140,106 +138,49 @@ const Company = () => {
 							role="tabpanel"
 							aria-labelledby="tabs-profile-tabFill"
 						>
-							{company.jobs.length > 1 ? (
-								company.jobs.map((job) => {
-									return <div>{job}</div>;
-								})
+							{company.jobs.length ? (
+								<section className="text-gray-600 body-font">
+									<div className="container py-5 mx-auto">
+										<div className="flex flex-wrap -m-4">
+											{company.jobs.map((job, index) => {
+												return (
+													<div className="p-4 md:w-1/2 w-full" key={index}>
+														<div className="h-full secondary-bg-color p-8 rounded">
+															<h2 className="mb-3 text-indigo-500">
+																<a href={job.applyUrl}>APPLY FOR JOB</a>
+															</h2>
+															<p className="leading-relaxed mb-6 font-color">
+																{job.description}
+															</p>
+
+															<span className="flex-grow flex flex-col">
+																<span className="title-font font-medium text-white">
+																	{job.position}
+																</span>
+																<div className="flex font-color">
+																	<span className="text-sm">
+																		{job.location.toUpperCase()}
+																	</span>
+																	<span className="text-sm mx-2">
+																		{job.jobType.toUpperCase()}
+																	</span>
+																	<span className="text-sm">
+																		${job.salary.toUpperCase()}
+																	</span>
+																</div>
+															</span>
+														</div>
+													</div>
+												);
+											})}
+										</div>
+									</div>
+								</section>
 							) : (
 								<p className="text-md">No Jobs posted </p>
 							)}
 						</div>
 					</div>
-					{/* <div className="divide-y divide-gray-700" key={company.id}>
-						<section className="text-gray-600 body-font mt-2">
-							<div className="container px-10 py-20 mx-auto">
-								<div className="flex flex-col w-full mx-auto">
-									<div className="w-full mx-auto">
-										<h2 className="sm:text-3xl text-2xl my-5 font-bold">
-											About The Company
-										</h2>
-										<p className="lg:w-3/4 about-me font-color">
-											{profile.summary ? profile.summary : 'No info to show'}
-										</p>
-									</div>
-								</div>
-							</div>
-						</section>
-						<section className="text-gray-600 body-font overflow-hidden">
-							<div className="container px-10 py-20 mx-auto">
-								<div className="flex flex-col w-full mx-auto">
-									<div className="w-full mx-auto">
-										<h2 className="sm:text-3xl text-2xl mb-5 font-bold">
-											Skills
-										</h2>
-										{company. ? (
-											<ul className="flex flex-wrap">
-												{profile.skills.map((skill, id) => {
-													return (
-														<li
-															className="mr-2 my-2 text-white px-4 py-2 rounded-3xl bg-indigo-700 cursor-pointer["
-															key={id}
-														>
-															{skill}
-														</li>
-													);
-												})}
-											</ul>
-										) : (
-											<p className="font-color">No skills to show</p>
-										)}
-									</div>
-								</div>
-							</div>
-						</section>
-						
-						<section className="text-gray-600 body-font overflow-hidden">
-							<div className="container px-10 py-20 mx-auto">
-								<div className="-my-8 mx-auto">
-									<h2 className="text-3xl my-8 mb-5 font-bold">Experience</h2>
-									{profile.experience.length ? (
-										<ol className="border-l-2 border-indigo-700 mt-10">
-											{profile.experience.map((exp, index) => {
-												return (
-													<Experience
-														experienceData={exp}
-														key={index}
-														itemIndex={index}
-													/>
-												);
-											})}
-										</ol>
-									) : (
-										<p className="font-color">No experiences to show</p>
-									)}
-								</div>
-							</div>
-						</section>
-			
-						<section className="text-gray-600 body-font">
-							<div className="container px-10 py-24 mx-auto">
-								<h2 className="sm:text-3xl text-2xl font-bold title-font mb-5">
-									Projects
-								</h2>
-								{profile.projects.length ? (
-									<div className="container py-5 mx-auto">
-										<div className="flex flex-wrap -m-4">
-											{profile.projects.map((proj, index) => {
-												return (
-													<Project
-														project={proj}
-														key={index}
-														itemIndex={index}
-													/>
-												);
-											})}
-										</div>
-									</div>
-								) : (
-									<p className="font-color">No projects to show</p>
-								)}
-							</div>
-						</section>
-					</div> */}
 				</>
 			)}
 		</>

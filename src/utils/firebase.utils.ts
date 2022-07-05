@@ -11,6 +11,7 @@ import {
 	where,
 	updateDoc,
 	arrayUnion,
+	addDoc,
 } from 'firebase/firestore';
 import {
 	getAuth,
@@ -33,7 +34,9 @@ import { SignUpFields } from '../store/features/auth/authTypes';
 import {
 	CompanyData,
 	UpdateCompany,
+	Jobs,
 } from '../store/features/company/companyTypes';
+import { JobData } from '../company/jobs/types';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCg113wgJGlfL1T8B7SwVSO6a-UezmyAas',
 	authDomain: 'hireplus-268ed.firebaseapp.com',
@@ -150,14 +153,25 @@ export const updateCompany = async (data: UpdateCompany) => {
 		companyUrl: companyUrl ? companyUrl : currentDocSnap.data().companyUrl,
 		isHiring: isHiring ? isHiring : currentDocSnap.data().isHiring,
 		companySize: companySize ? companySize : currentDocSnap.data().companySize,
-		jobs: arrayUnion(...jobs),
+		jobs: jobs ? jobs : arrayUnion(...jobs),
 	}).then(() => {
 		console.log('updated successfully');
 	});
 };
 
 // ----------- JOB API ----------------------------
+export const setCompanyJobs = async (data: Jobs): Promise<void> => {
+	try {
+		await addDoc(collection(db, 'jobs'), {
+			id: auth.currentUser.uid,
+			...data,
+		});
+	} catch (error) {
+		console.log('error with get user auth and create doc', error);
+	}
+};
 
+// ----------- CANDIDATES API ----------------------------
 // export const getCandidates = async (): Promise<CandidateData[]> => {
 // 	const querySnapshot = await getDocs(collection(db, 'employers'));
 // 	return querySnapshot.docs.map((doc) => {

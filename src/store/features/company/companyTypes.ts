@@ -6,7 +6,17 @@ export type CompanyData = {
 	email: string;
 	isHiring: boolean;
 	companySize: string;
-	jobs: [];
+	jobs: Jobs[];
+};
+export type Jobs = {
+	position: string;
+	location: string;
+	salary: string;
+	datePosted: string;
+	jobType: string;
+	applyUrl: string;
+	description: string;
+	companyName: string;
 };
 
 export type UpdateCompany = {
@@ -15,5 +25,5 @@ export type UpdateCompany = {
 	companyUrl: string;
 	isHiring: boolean;
 	companySize: string;
-	jobs: [];
+	jobs: Jobs[];
 };
