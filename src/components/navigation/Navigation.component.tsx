@@ -1,11 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { signoutUser } from '../../store/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const Navigation = () => {
+	const { employeeId } = useParams();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { isSignedIn, currentUser } = useAppSelector((state) => state.auth);
+	const { company } = useAppSelector((state) => state.company);
 
 	const logout = () => {
 		try {
@@ -39,11 +41,14 @@ const Navigation = () => {
 				{isSignedIn ? (
 					<>
 						<nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-							<Link to="/" className="mr-5 hover:text-gray-500">
-								Candidates
-							</Link>
+							{currentUser.uid === employeeId ? (
+								<Link to="/" className="mr-5 hover:text-gray-500">
+									Candidates
+								</Link>
+							) : null}
+
 							<Link
-								to={`company/profile/${currentUser.uid}`}
+								to={`company/${company.id}/${currentUser.uid}`}
 								className="mr-5 hover:text-gray-500"
 							>
 								Company Profile
@@ -58,9 +63,11 @@ const Navigation = () => {
 					</>
 				) : (
 					<nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-						<Link to="/" className="mr-5 hover:text-gray-500">
-							Candidates
-						</Link>
+						{currentUser.uid === employeeId ? (
+							<Link to="/" className="mr-5 hover:text-gray-500">
+								Candidates
+							</Link>
+						) : null}
 						<Link to="auth/employers" className="mr-5 hover:text-gray-500">
 							Sign In
 						</Link>
