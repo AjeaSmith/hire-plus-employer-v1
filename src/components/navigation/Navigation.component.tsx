@@ -21,13 +21,13 @@ const Navigation = () => {
 	return (
 		<header className="logo sticky top-0 z-10 border-b-2 border-gray-700 px-10 py-5">
 			<div className="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
+				<a href="https://hire-plus-v1.vercel.app/">
+					Hire <span className="mr-1 text-indigo-500">+Plus</span>
+				</a>
 				<Link
 					to="/"
 					className="flex title-font font-bold items-center mb-4 md:mb-0 text-md"
 				>
-					<a href="https://hire-plus-v1.vercel.app/">
-						Hire <span className="mr-1 text-indigo-500">+Plus</span>
-					</a>
 					<span className="pr-2">Employers</span>
 					{isSignedIn && currentUser.displayName ? (
 						<span className="border-l-2 border-gray-700 pl-2">
