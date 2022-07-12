@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
 	setEdittingView,
-	setJobsDB,
 	setModal,
 	updateCompanyById,
 } from '../../store/features/company/companySlice';

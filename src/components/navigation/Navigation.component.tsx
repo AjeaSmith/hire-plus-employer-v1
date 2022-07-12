@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { signoutUser } from '../../store/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import logo from '../../assets/1.svg';
 
 const Navigation = () => {
 	const { employeeId } = useParams();
@@ -20,10 +21,10 @@ const Navigation = () => {
 		}
 	};
 	return (
-		<header className="logo sticky top-0 z-10 border-b-2 border-gray-700 px-10 py-5">
+		<header className="logo sticky top-0 z-10 border-b-2 border-gray-700 px-10">
 			<div className="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
-				<a href="https://hire-plus-v1.vercel.app/">
-					Hire <span className="mr-1 text-indigo-500">+Plus</span>
+				<a href="https://hire-plus-v1.vercel.app/" className='mr-2'>
+					<img src={logo} alt="logo" style={{ height: '75px' }} />
 				</a>
 				<Link
 					to="/"
