@@ -73,7 +73,17 @@ export const signInEmailAndPassword = async (
 	password: string
 ) => {
 	if (!email || !password) return;
-	return await signInWithEmailAndPassword(auth, email, password);
+	const userDocRef = collection(db, 'employers');
+	const doc = query(userDocRef, where('email', '==', email));
+
+	const docSnapshot = await getDocs(doc);
+
+	if (docSnapshot.empty) {
+		return;
+	} else {
+		console.log('Document data:', docSnapshot);
+		return await signInWithEmailAndPassword(auth, email, password);
+	}
 };
 
 // create db from signed in user

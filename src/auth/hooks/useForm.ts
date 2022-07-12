@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { Props } from '../types';
 import useReduxAuth from './useReduxAuth';
 
-const useHandleForm = (fields: Props) => {
+const useForm = (fields: Props) => {
 	const { dispatchSignUpUser, dispatchSignInUser } = useReduxAuth();
 	const [loginInput, setLoginInput] = useState(fields.loginFields);
 	const [registerInput, setRegisterInput] = useState(fields.registerFields);
@@ -56,4 +56,4 @@ const useHandleForm = (fields: Props) => {
 	};
 };
 
-export default useHandleForm;
+export default useForm;

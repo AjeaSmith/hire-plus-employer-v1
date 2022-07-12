@@ -1,5 +1,5 @@
 import BeatLoader from 'react-spinners/BeatLoader';
-import useHandleForm from '../hooks/useHandleForms';
+import useForm from '../hooks/useForm';
 import useReduxAuth from '../hooks/useReduxAuth';
 
 const registerFields = {
@@ -11,7 +11,7 @@ const registerFields = {
 
 const Signup = () => {
 	const { registerInput, handleRegisterChange, handleSubmit, message } =
-		useHandleForm({
+		useForm({
 			registerFields,
 		});
 	const { isLoading } = useReduxAuth();
