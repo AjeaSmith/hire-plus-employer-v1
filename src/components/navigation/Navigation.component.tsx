@@ -7,7 +7,6 @@ const Navigation = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { isSignedIn, currentUser } = useAppSelector((state) => state.auth);
-	const { company } = useAppSelector((state) => state.company);
 
 	const logout = () => {
 		try {
@@ -48,7 +47,7 @@ const Navigation = () => {
 							) : null}
 
 							<Link
-								to={`company/${company.id}/${currentUser.uid}`}
+								to={`company/${currentUser.uid}`}
 								className="mr-5 hover:text-gray-500"
 							>
 								Company Profile

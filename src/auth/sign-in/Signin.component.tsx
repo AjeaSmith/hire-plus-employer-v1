@@ -1,22 +1,15 @@
 import BeatLoader from 'react-spinners/BeatLoader';
 import useForm from '../hooks/useForm';
 
-import useReduxAuth from '../hooks/useReduxAuth';
-
 const loginFields = {
 	email: '',
 	password: '',
 };
 const SignIn = () => {
-	const {
-		handleLoginChange,
-		handleSubmit,
-		loginInput,
-		message: formMessage,
-	} = useForm({
-		loginFields,
-	});
-	const { isLoading, message } = useReduxAuth();
+	const { handleLoginChange, handleSubmit, loginInput, message, isLoading } =
+		useForm({
+			loginFields,
+		});
 	return (
 		<div className="items-center px-5 mt-10">
 			<div className="flex flex-col w-full max-w-md p-6 mx-auto my-6 transition duration-500 ease-in-out transform rounded-lg md:mt-0 secondary-bg-color">
@@ -32,11 +25,6 @@ const SignIn = () => {
 					{message && (
 						<div className="text-center text-red-600 mb-5 text-lg">
 							{message}
-						</div>
-					)}
-					{formMessage && (
-						<div className="text-center text-red-600 mb-5 text-lg">
-							{formMessage}
 						</div>
 					)}
 					<div>
@@ -95,7 +83,7 @@ const SignIn = () => {
 								>
 									{isLoading ? (
 										<div className="text-center z-index">
-											<BeatLoader color={'white'} loading={true} />
+											<BeatLoader color={'white'} loading={isLoading} />
 										</div>
 									) : (
 										<p>Sign in</p>

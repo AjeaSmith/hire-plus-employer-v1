@@ -1,9 +1,17 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router';
+import {
+	signInWithEmailAndPassword,
+	signUpUserEmailAndPassword,
+} from '../../store/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Props } from '../types';
-import useReduxAuth from './useReduxAuth';
 
 const useForm = (fields: Props) => {
-	const { dispatchSignUpUser, dispatchSignInUser } = useReduxAuth();
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const { isLoading } = useAppSelector((state) => state.auth);
+
 	const [loginInput, setLoginInput] = useState(fields.loginFields);
 	const [registerInput, setRegisterInput] = useState(fields.registerFields);
 
@@ -33,14 +41,30 @@ const useForm = (fields: Props) => {
 	) => {
 		event.preventDefault();
 		if (form === 'login') {
-			dispatchSignInUser(loginInput);
-			resetFormFields('login');
+			dispatch(signInWithEmailAndPassword(loginInput))
+				.unwrap()
+				.then(() => {
+					navigate('/');
+					resetFormFields('login');
+				})
+				.catch((error) => {
+					setMessage('User does not exist in the database');
+					console.log(error);
+				});
 		} else if (form === 'register') {
 			if (registerInput.password !== registerInput.confirmPassword) {
 				return setMessage(`Passwords don't match`);
+			} else {
+				dispatch(signUpUserEmailAndPassword(registerInput))
+					.unwrap()
+					.then(() => {
+						navigate('/');
+						resetFormFields('register');
+					})
+					.catch((error) => {
+						console.log(error);
+					});
 			}
-			dispatchSignUpUser(registerInput);
-			resetFormFields('register');
 		}
 		return;
 	};
@@ -50,6 +74,7 @@ const useForm = (fields: Props) => {
 		handleLoginChange,
 		handleRegisterChange,
 		loginInput,
+		isLoading,
 		registerInput,
 		handleSubmit,
 		message,

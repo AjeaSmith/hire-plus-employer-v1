@@ -39,7 +39,7 @@ function App() {
 						<Route path="sign-up" element={<Signup />} />
 					</Route>
 					<Route
-						path="company/profile/:id"
+						path="company/:id"
 						element={
 							<PrivateRoute>
 								<CompanyPage />

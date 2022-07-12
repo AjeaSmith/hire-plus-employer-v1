@@ -12,7 +12,6 @@ const Company: React.FC<CompanyProps> = ({ employeeId }) => {
 	const settingEditView = () => {
 		dispatch(setEdittingView(!isEditting));
 	};
-	console.log(company.id);
 	return (
 		<>
 			{company && (
@@ -133,7 +132,11 @@ const Company: React.FC<CompanyProps> = ({ employeeId }) => {
 							role="tabpanel"
 							aria-labelledby="tabs-home-tabFill"
 						>
-							<p className="text-md px-10">{company.companyDescription}</p>
+							{company.companyDescription ? (
+								<p className="text-md px-10">{company.companyDescription}</p>
+							) : (
+								<p className="text-md px-10">Nothing to view, yet :)</p>
+							)}
 						</div>
 						<div
 							className="tab-pane fade"
@@ -180,7 +183,7 @@ const Company: React.FC<CompanyProps> = ({ employeeId }) => {
 									</div>
 								</section>
 							) : (
-								<p className="text-md">No Jobs posted </p>
+								<p className="text-md px-10">No jobs posted </p>
 							)}
 						</div>
 					</div>
