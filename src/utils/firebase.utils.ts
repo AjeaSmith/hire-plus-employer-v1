@@ -15,7 +15,6 @@ import {
 } from 'firebase/firestore';
 import {
 	getAuth,
-	signInWithPopup,
 	GoogleAuthProvider,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
@@ -48,10 +47,6 @@ const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
 	prompt: 'select_account',
 });
-
-type AdditionalInfo = {
-	displayName?: string;
-};
 
 // Firebase setup
 export const auth = getAuth();

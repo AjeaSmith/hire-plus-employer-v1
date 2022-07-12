@@ -12,6 +12,12 @@ const Company: React.FC<CompanyProps> = ({ employeeId }) => {
 	const settingEditView = () => {
 		dispatch(setEdittingView(!isEditting));
 	};
+	const truncateString = (str: string, num: number) => {
+		if (str.length <= num) {
+			return str;
+		}
+		return str.slice(0, num) + '...';
+	};
 	return (
 		<>
 			{company && (
@@ -25,14 +31,14 @@ const Company: React.FC<CompanyProps> = ({ employeeId }) => {
 									<p>Not hiring at the moment</p>
 								)}
 							</div>
-							{currentUser.uid !== employeeId ? null : (
-								<button
-									onClick={settingEditView}
-									className="underline text-md text-indigo-500"
-								>
-									Edit Company
-								</button>
-							)}
+							{/* {currentUser.uid !== employeeId ? null : (
+							)} */}
+							<button
+								onClick={settingEditView}
+								className="underline text-md text-indigo-500"
+							>
+								Edit Company
+							</button>
 						</div>
 						<div className="md:px-12 lg:px-24 max-w-7xl relative items-center w-full px-5 py-5 mx-auto">
 							<div className="mx-auto flex flex-col w-full max-w-lg mb-12 text-center">
@@ -156,7 +162,7 @@ const Company: React.FC<CompanyProps> = ({ employeeId }) => {
 																<a href={job.applyUrl}>APPLY FOR JOB</a>
 															</h2>
 															<p className="leading-relaxed mb-6 font-color">
-																{job.description}
+																{truncateString(job.description, 250)}
 															</p>
 
 															<span className="flex-grow flex flex-col">

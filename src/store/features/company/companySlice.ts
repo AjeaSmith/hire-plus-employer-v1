@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { JobData } from '../../../company/jobs/types';
 import {
 	getCompany,
 	setCompanyJobs,

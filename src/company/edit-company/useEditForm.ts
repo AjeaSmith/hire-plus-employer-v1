@@ -30,14 +30,13 @@ const useEditForm = () => {
 		setFormFields({
 			...formFields,
 			[name]: value,
-			[formFields.companyDescription]: value,
 		});
-		console.log(name, value);
 	};
 	const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
 		setFormFields({
 			...formFields,
-			[formFields.companyDescription]: e.target.value,
+			[name]: value,
 		});
 	};
 

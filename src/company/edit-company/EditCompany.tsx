@@ -85,11 +85,47 @@ const EditCompany = () => {
 			</section>
 			<section>
 				<div className="divide-y divide-gray-700">
-					<section className="text-gray-600 body-font mt-2">
+					{/* Jobs starts */}
+					<section className="text-gray-600 body-font">
+						<div className="container px-5 py-24 mx-auto">
+							<div className="text-left mb-5">
+								<h2 className="sm:text-3xl text-2xl font-bold title-font mb-5">
+									Jobs
+								</h2>
+								<button
+									onClick={openModal}
+									className="block text-white bg-indigo-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+									type="button"
+									data-modal-toggle="defaultModal"
+								>
+									Add Job
+								</button>
+								<AddJobModal />
+							</div>
+							<p className="mb-5 font-color">
+								Be sure to <b>'Update'</b> for these changes to take effect :)
+							</p>
+							<div className="flex flex-wrap -m-4">
+								{company.jobs.length
+									? company.jobs.map((job, index) => {
+											return (
+												<Job
+													job={job}
+													key={index}
+													itemIndex={index}
+													removeItem={removeItem}
+												/>
+											);
+									  })
+									: null}
+							</div>
+						</div>
+					</section>
+					<section className="text-gray-600 body-font">
 						<div className="container px-5 py-20 mx-auto">
 							<div className="flex flex-col w-full mx-auto">
 								<div className="w-full mx-auto">
-									<h2 className="sm:text-3xl text-2xl my-5 font-bold">
+									<h2 className="sm:text-3xl text-2xl mb-10 font-bold">
 										About the company
 									</h2>
 									<div>
@@ -112,7 +148,7 @@ const EditCompany = () => {
 						<div className="container px-5 py-20 mx-auto">
 							<div className="flex flex-col w-full mx-auto">
 								<div className="w-full mx-auto">
-									<h2 className="sm:text-3xl text-2xl my-5 font-bold">
+									<h2 className="sm:text-3xl text-2xl mb-10 font-bold">
 										Company Size
 									</h2>
 									<div>
@@ -126,40 +162,6 @@ const EditCompany = () => {
 										></input>
 									</div>
 								</div>
-							</div>
-						</div>
-					</section>
-					{/* Jobs starts */}
-					<section className="text-gray-600 body-font">
-						<div className="container px-5 py-24 mx-auto">
-							<div className="text-left mb-5">
-								<h2 className="sm:text-3xl text-2xl font-bold title-font mb-5">
-									Jobs
-								</h2>
-								<button
-									onClick={openModal}
-									className="block text-white bg-indigo-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
-									type="button"
-									data-modal-toggle="defaultModal"
-								>
-									Add Job
-								</button>
-								<AddJobModal />
-							</div>
-							<p className='mb-5 font-color'>Be sure to <b>'Update'</b> for these changes to take effect :)</p>
-							<div className="flex flex-wrap -m-4">
-								{company.jobs.length
-									? company.jobs.map((job, index) => {
-											return (
-												<Job
-													job={job}
-													key={index}
-													itemIndex={index}
-													removeItem={removeItem}
-												/>
-											);
-									  })
-									: null}
 							</div>
 						</div>
 					</section>
