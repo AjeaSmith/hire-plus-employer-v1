@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
 	logoutUser,
 	signInEmailAndPassword,
-	signInWithGooglePopup,
 	signUpEmailAndPassword,
 } from '../../../utils/firebase.utils';
 
@@ -26,12 +25,6 @@ const initialState: userState = {
 // async actions
 
 // ------- USER ACTIONS --------------------------------
-export const signInWithGoogle = createAsyncThunk(
-	'user/signInWithGoogle',
-	async () => {
-		await signInWithGooglePopup();
-	}
-);
 export const signInWithEmailAndPassword = createAsyncThunk(
 	'user/signInEmailAndPassword',
 	async (formFields: LoginFields) => {
@@ -72,9 +65,6 @@ const userSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(signInWithGoogle.rejected, (_, action) => {
-				console.log('something went wrong with google sign-in', action.error);
-			})
 			// ---------------------------------------- SIGN IN ACTIONS ---------------------------------
 			.addCase(signInWithEmailAndPassword.pending, (state) => {
 				state.isLoading = true;

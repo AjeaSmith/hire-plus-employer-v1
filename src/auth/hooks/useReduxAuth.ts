@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
 	signInWithEmailAndPassword,
-	signInWithGoogle,
 	signUpUserEmailAndPassword,
 } from '../../store/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -32,9 +31,7 @@ const useReduxAuth = () => {
 			});
 	};
 	const dispatchSignInUser = (loginFields: LoginFields) => {
-		dispatch(
-			signInWithEmailAndPassword(loginFields)
-		)
+		dispatch(signInWithEmailAndPassword(loginFields))
 			.unwrap()
 			.then(() => {
 				navigate('/');
@@ -45,22 +42,12 @@ const useReduxAuth = () => {
 			});
 		setmessage('');
 	};
-	const dispatchGoogleSignIn = async () => {
-		dispatch(signInWithGoogle())
-			.unwrap()
-			.then(() => {
-				navigate('/');
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
+
 	return {
 		dispatchSignUpUser,
 		dispatchSignInUser,
 		isLoading,
 		message,
-		dispatchGoogleSignIn,
 	};
 };
 

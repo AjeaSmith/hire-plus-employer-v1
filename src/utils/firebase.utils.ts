@@ -57,14 +57,6 @@ type AdditionalInfo = {
 export const auth = getAuth();
 export const db = getFirestore(firebaseApp);
 
-// Sign in with google helper
-export const signInWithGooglePopup = async (
-	additionalInfo = {} as AdditionalInfo
-) => {
-	const { user } = await signInWithPopup(auth, googleProvider);
-	await createCompanyDocument(user);
-};
-
 // sign up with email and password
 export const signUpEmailAndPassword = async (formFields: SignUpFields) => {
 	const { email, password, displayName } = formFields;

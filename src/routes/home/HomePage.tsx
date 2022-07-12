@@ -1,10 +1,7 @@
-import React from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useParams } from 'react-router';
 import Navigation from '../../components/navigation/Navigation.component';
 
-interface HomePageProps {}
-
-const HomePage: React.FC<HomePageProps> = () => {
+const HomePage = () => {
 	return (
 		<>
 			<Navigation />

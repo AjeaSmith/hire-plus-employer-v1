@@ -38,7 +38,14 @@ function App() {
 						<Route index element={<SignIn />} />
 						<Route path="sign-up" element={<Signup />} />
 					</Route>
-					<Route path="company/:id/:employeeId" element={<CompanyPage />} />
+					<Route
+						path="company/profile/:id"
+						element={
+							<PrivateRoute>
+								<CompanyPage />
+							</PrivateRoute>
+						}
+					/>
 				</Route>
 				<Route path="*" element={<NoMatch />} />
 			</Routes>
