@@ -32,7 +32,7 @@ const Navigation = () => {
 				>
 					<span className="pr-2">Employers</span>
 					{isSignedIn && currentUser.displayName ? (
-						<span className="border-l-2 border-gray-700 pl-2">
+						<span className="border-l-2 border-gray-300 pl-2">
 							{currentUser.displayName}
 						</span>
 					) : null}
