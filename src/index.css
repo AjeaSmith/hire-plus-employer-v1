@@ -90,3 +90,7 @@ input:checked + .toggle-bg:after {
 input:checked + .toggle-bg {
     @apply bg-indigo-700 border-indigo-700;
 }
+
+input::placeholder{
+	@apply text-slate-500
+}

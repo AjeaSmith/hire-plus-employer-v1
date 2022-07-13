@@ -30,6 +30,7 @@ import {
 	UpdateCompany,
 	Jobs,
 } from '../store/features/company/companyTypes';
+import { CandidateData } from '../store/features/candidate/candidateTypes';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCg113wgJGlfL1T8B7SwVSO6a-UezmyAas',
 	authDomain: 'hireplus-268ed.firebaseapp.com',
@@ -163,10 +164,10 @@ export const setCompanyJobs = async (data: Jobs): Promise<void> => {
 };
 
 // ----------- CANDIDATES API ----------------------------
-// export const getCandidates = async (): Promise<CandidateData[]> => {
-// 	const querySnapshot = await getDocs(collection(db, 'employers'));
-// 	return querySnapshot.docs.map((doc) => {
-// 		// doc.data() is never undefined for query doc snapshots
-// 		return doc.data() as CandidateData;
-// 	});
-// };
+export const getCandidates = async (): Promise<CandidateData[]> => {
+	const querySnapshot = await getDocs(collection(db, 'employers'));
+	return querySnapshot.docs.map((doc) => {
+		// doc.data() is never undefined for query doc snapshots
+		return doc.data() as CandidateData;
+	});
+};
