@@ -20,7 +20,7 @@ export const getAllCandidates = createAsyncThunk(
 	}
 );
 
-const companySlice = createSlice({
+const candidateSlice = createSlice({
 	name: 'company',
 	initialState,
 	reducers: {},
@@ -41,6 +41,6 @@ const companySlice = createSlice({
 	},
 });
 
-export const {} = companySlice.actions;
+export const {} = candidateSlice.actions;
 
-export default companySlice.reducer;
+export default candidateSlice.reducer;

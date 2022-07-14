@@ -165,7 +165,7 @@ export const setCompanyJobs = async (data: Jobs): Promise<void> => {
 
 // ----------- CANDIDATES API ----------------------------
 export const getCandidates = async (): Promise<CandidateData[]> => {
-	const querySnapshot = await getDocs(collection(db, 'employers'));
+	const querySnapshot = await getDocs(collection(db, 'employees'));
 	return querySnapshot.docs.map((doc) => {
 		// doc.data() is never undefined for query doc snapshots
 		return doc.data() as CandidateData;

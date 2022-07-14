@@ -1,5 +1,6 @@
 import { setEdittingView } from '../store/features/company/companySlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { truncateString } from '../utils/truncateString';
 
 interface CompanyProps {
 	employeeId: string;
@@ -12,12 +13,7 @@ const Company: React.FC<CompanyProps> = ({ employeeId }) => {
 	const settingEditView = () => {
 		dispatch(setEdittingView(!isEditting));
 	};
-	const truncateString = (str: string, num: number) => {
-		if (str.length <= num) {
-			return str;
-		}
-		return str.slice(0, num) + '...';
-	};
+
 	return (
 		<>
 			{company && (

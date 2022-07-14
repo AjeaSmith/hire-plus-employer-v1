@@ -1,6 +1,7 @@
 export type CandidateData = {
 	id: string;
 	email: string;
+	name: string;
 	createdAt: number;
 	headline: string;
 	isForHire: boolean;

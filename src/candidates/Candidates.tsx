@@ -1,32 +1,47 @@
 import globeSVG from '../assets/globe.svg';
-const Candidates = () => {
+import { CandidateData } from '../store/features/candidate/candidateTypes';
+import { useAppSelector } from '../store/hooks';
+import { truncateString } from '../utils/truncateString';
+
+interface CandidatesProps {
+	candidate: CandidateData;
+}
+const Candidates: React.FC<CandidatesProps> = ({ candidate }) => {
+	const { isSignedIn } = useAppSelector((state) => state.auth);
 	return (
-		<>
-			<div className="p-4 lg:w-1/2">
-				<div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-					<img
-						alt="team"
-						className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-						src="https://dummyimage.com/200x200"
-					/>
-					<div className="flex-grow sm:pl-8">
-						<h2 className="title-font font-medium text-lg text-indigo-500">
-							Holden Caulfield
-						</h2>
-						<h3 className="text-slate-500 mb-3">UI Developer</h3>
+		<div className="p-4 lg:w-1/2">
+			<div className="h-full flex sm:flex-row flex-col sm:justify-start items-center justify-center text-center sm:text-left">
+				<img
+					alt="team"
+					className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
+					src="https://picsum.photos/200"
+				/>
+				<div className="flex-grow sm:pl-8">
+					<h2 className="title-font font-medium text-lg text-indigo-500">
+						{candidate.name}
+					</h2>
+					{candidate.headline ? (
+						<h3 className="text-slate-500 mb-3">{candidate.headline}</h3>
+					) : null}
+					{candidate.summary ? (
 						<p className="mb-4 font-color">
-							DIY tote bag drinking vinegar cronut adaptogen squid fanny pack
-							vaporware.
+							{truncateString(candidate.summary, 100)}
 						</p>
+					) : null}
+
+					{candidate.websiteURL ? (
 						<span className="inline-flex">
-							<a className="text-gray-200">
-								<img src={globeSVG} alt="globe" className='w-5' />
+							<a href={candidate.websiteURL} className="text-gray-200 mr-3">
+								<img src={globeSVG} alt="globe" className="w-5" />
 							</a>
+							{isSignedIn ? (
+								<span className="inline-flex text-indigo-500">Add To Board</span>
+							) : null}
 						</span>
-					</div>
+					) : null}
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
