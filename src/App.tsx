@@ -11,6 +11,7 @@ import NoMatch from './routes/noMatch/NoMatch';
 import { setSignedIn } from './store/features/auth/authSlice';
 import { useAppDispatch } from './store/hooks';
 import { onAuthStateChangedListener } from './utils/firebase.utils';
+import ViewCandidate from './candidates/view-candidate/ViewCandidate';
 
 function App() {
 	const dispatch = useAppDispatch();
@@ -46,6 +47,7 @@ function App() {
 							</PrivateRoute>
 						}
 					/>
+					<Route path="view_candidate/:id" element={<ViewCandidate />} />
 				</Route>
 				<Route path="*" element={<NoMatch />} />
 			</Routes>

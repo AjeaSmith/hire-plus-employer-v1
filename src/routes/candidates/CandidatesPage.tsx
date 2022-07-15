@@ -14,7 +14,9 @@ const CandidatesPage = () => {
 	return (
 		<>
 			{isLoading ? (
-				<BeatLoader />
+				<div className="text-center z-index mt-20">
+					<BeatLoader color={'white'} loading={isLoading} />
+				</div>
 			) : (
 				<section className="text-gray-600 body-font">
 					<div className="container px-5 py-24 mx-auto">

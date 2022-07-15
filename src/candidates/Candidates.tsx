@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import globeSVG from '../assets/globe.svg';
 import { CandidateData } from '../store/features/candidate/candidateTypes';
 import { useAppSelector } from '../store/hooks';
@@ -18,7 +19,7 @@ const Candidates: React.FC<CandidatesProps> = ({ candidate }) => {
 				/>
 				<div className="flex-grow sm:pl-8">
 					<h2 className="title-font font-medium text-lg text-indigo-500">
-						{candidate.name}
+						<Link to={`/view_candidate/${candidate.id}`}>{candidate.name}</Link>
 					</h2>
 					{candidate.headline ? (
 						<h3 className="text-slate-500 mb-3">{candidate.headline}</h3>
@@ -35,7 +36,9 @@ const Candidates: React.FC<CandidatesProps> = ({ candidate }) => {
 								<img src={globeSVG} alt="globe" className="w-5" />
 							</a>
 							{isSignedIn ? (
-								<span className="inline-flex text-indigo-500">Add To Board</span>
+								<span className="inline-flex text-indigo-500">
+									Add To Board
+								</span>
 							) : null}
 						</span>
 					) : null}

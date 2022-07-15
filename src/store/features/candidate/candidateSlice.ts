@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCandidates } from '../../../utils/firebase.utils';
+import { getCandidates, getCandidate } from '../../../utils/firebase.utils';
 import { CandidateData } from './candidateTypes';
 
 interface candidateState {
@@ -13,15 +13,23 @@ const initialState: candidateState = {
 	message: '',
 };
 export const getAllCandidates = createAsyncThunk(
-	'company/getCandidates',
+	'candidate/getCandidates',
 	async () => {
 		const candidates = await getCandidates();
 		return JSON.stringify(candidates);
 	}
 );
+export const getOneCandidate = createAsyncThunk(
+	'candidate/getOneCandidate',
+	async (id: string) => {
+		const candidate = await getCandidate(id);
+		const [candidateObj] = candidate;
+		return JSON.stringify(candidateObj);
+	}
+);
 
 const candidateSlice = createSlice({
-	name: 'company',
+	name: 'candidate',
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
@@ -37,6 +45,18 @@ const candidateSlice = createSlice({
 				state.isLoading = false;
 				state.message =
 					'There was an error loading the candidates page, try again later';
+			})
+			.addCase(getOneCandidate.pending, (state, action) => {
+				state.isLoading = true;
+			})
+			.addCase(getOneCandidate.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.candidates = JSON.parse(action.payload);
+			})
+			.addCase(getOneCandidate.rejected, (state, action) => {
+				state.isLoading = false;
+				state.message =
+					'There was an error loading the candidate page, try again later';
 			});
 	},
 });

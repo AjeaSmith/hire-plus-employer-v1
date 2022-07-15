@@ -13,9 +13,9 @@ const useCandidate = () => {
 		dispatch(getAllCandidates());
 	}, []);
 
-	const filterUnqualifiedUsers = candidates.filter(
-		(val) => val.headline !== '' || val.summary !== ''
-	);
+	const filterUnqualifiedUsers = Array.isArray(candidates)
+		? candidates.filter((val) => val.headline !== '' || val.summary !== '')
+		: [];
 	const searchItems = (value: string) => {
 		setSearchInput(value);
 		if (searchInput !== '') {
