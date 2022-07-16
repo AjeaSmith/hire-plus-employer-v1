@@ -12,6 +12,7 @@ import { setSignedIn } from './store/features/auth/authSlice';
 import { useAppDispatch } from './store/hooks';
 import { onAuthStateChangedListener } from './utils/firebase.utils';
 import ViewCandidate from './candidates/view-candidate/ViewCandidate';
+import ManageCandidatesPage from './routes/manageboard/ManageCandidatesPage';
 
 function App() {
 	const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ function App() {
 						}
 					/>
 					<Route path="view_candidate/:id" element={<ViewCandidate />} />
+					<Route path="manage/board" element={<ManageCandidatesPage />} />
 				</Route>
 				<Route path="*" element={<NoMatch />} />
 			</Routes>

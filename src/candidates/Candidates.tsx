@@ -30,18 +30,20 @@ const Candidates: React.FC<CandidatesProps> = ({ candidate }) => {
 						</p>
 					) : null}
 
-					{candidate.websiteURL ? (
-						<span className="inline-flex">
-							<a href={candidate.websiteURL} className="text-gray-200 mr-3">
-								<img src={globeSVG} alt="globe" className="w-5" />
-							</a>
-							{isSignedIn ? (
-								<span className="inline-flex text-indigo-500">
-									Add To Board
-								</span>
-							) : null}
-						</span>
-					) : null}
+					<div className="flex items-center">
+						{candidate.websiteURL ? (
+							<span className="inline-flex">
+								<a href={candidate.websiteURL} className="text-gray-200 mr-3">
+									<img src={globeSVG} alt="globe" className="w-5" />
+								</a>
+							</span>
+						) : null}
+						{isSignedIn ? (
+							<Link to="manage/board" className="text-indigo-500">
+								Add To Board
+							</Link>
+						) : null}
+					</div>
 				</div>
 			</div>
 		</div>

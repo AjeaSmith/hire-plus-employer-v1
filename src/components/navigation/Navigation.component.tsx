@@ -23,7 +23,7 @@ const Navigation = () => {
 	return (
 		<header className="logo sticky top-0 z-10 border-b-2 border-gray-700 px-10">
 			<div className="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
-				<a href="https://hire-plus-v1.vercel.app/" className='mr-2'>
+				<a href="https://hire-plus-v1.vercel.app/" className="mr-2">
 					<img src={logo} alt="logo" style={{ height: '75px' }} />
 				</a>
 				<Link
@@ -41,11 +41,12 @@ const Navigation = () => {
 				{isSignedIn ? (
 					<>
 						<nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-							{currentUser.uid === employeeId ? (
-								<Link to="/" className="mr-5 hover:text-gray-500">
-									Candidates
-								</Link>
-							) : null}
+							<Link to="/manage/board" className="mr-5 hover:text-gray-500">
+								Board
+							</Link>
+							<Link to="/" className="mr-5 hover:text-gray-500">
+								Candidates
+							</Link>
 
 							<Link
 								to={`company/${currentUser.uid}`}
