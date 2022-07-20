@@ -4,10 +4,12 @@ import { BeatLoader } from 'react-spinners';
 import { getOneCandidate } from '../../store/features/candidate/candidateSlice';
 import { CandidateData } from '../../store/features/candidate/candidateTypes';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import useManageCandidate from '../manage-candidates/useManageCandidate';
 
 const ViewCandidate = () => {
 	const { id } = useParams();
 	const dispatch = useAppDispatch();
+	const { addNewCandidateToBoard } = useManageCandidate();
 	const { isLoading } = useAppSelector((state) => state.candidate);
 	const [candidateObj, setcandidateObj] = useState<CandidateData>(
 		{} as CandidateData
@@ -35,6 +37,14 @@ const ViewCandidate = () => {
 								) : (
 									<p>Not currently looking for work</p>
 								)}
+							</div>
+							<div className="flex justify-center text-md text-slate-200">
+								<button
+									type="button"
+									onClick={() => addNewCandidateToBoard(candidateObj.name)}
+								>
+									Add to Board
+								</button>
 							</div>
 						</div>
 						<div className="md:px-12 lg:px-24 max-w-7xl relative items-center w-full px-5 py-5 mx-auto">

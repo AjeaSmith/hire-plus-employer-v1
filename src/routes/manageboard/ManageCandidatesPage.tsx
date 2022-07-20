@@ -1,13 +1,7 @@
-import React from 'react';
+import ManageCandidates from '../../candidates/manage-candidates/ManageCandidates';
 
-interface ManageCandidatesProps {}
-
-const ManageCandidatesPage: React.FC<ManageCandidatesProps> = () => {
-	return (
-		<div>
-			<p className="text-white">Manage candidates</p>
-		</div>
-	);
+const ManageCandidatesPage = () => {
+	return <ManageCandidates />;
 };
 
 export default ManageCandidatesPage;

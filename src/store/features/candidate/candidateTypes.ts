@@ -23,3 +23,16 @@ type ProjectData = {
 	github: string;
 	projectUrl: string;
 };
+type ItemData = {
+	id: string;
+	name: string;
+	occupation: string;
+	linkToProfile: string;
+};
+export type TrelloBoardData = {
+	candidatesToReview: ItemData[];
+	Interviewing: ItemData[];
+	notAMatch: ItemData[];
+	noResponse: ItemData[];
+	toBeHired: ItemData[];
+};

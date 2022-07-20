@@ -1,14 +1,41 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getCandidates, getCandidate } from '../../../utils/firebase.utils';
-import { CandidateData } from './candidateTypes';
+import { CandidateData, TrelloBoardData } from './candidateTypes';
 
 interface candidateState {
 	candidates: CandidateData[];
+	board: TrelloBoardData;
 	isLoading: boolean;
 	message: string;
 }
 const initialState: candidateState = {
 	candidates: [],
+	board: {
+		candidatesToReview: [
+			{
+				id: '1',
+				name: 'James Steward',
+				occupation: 'Web Developer',
+				linkToProfile: 'https://www.google.com',
+			},
+			{
+				id: '2',
+				name: 'Chris Michaels',
+				occupation: 'Front-end Developer',
+				linkToProfile: 'https://www.google.com',
+			},
+			{
+				id: '3',
+				name: 'Tom Soho',
+				occupation: 'Software Engineer',
+				linkToProfile: 'https://www.google.com',
+			},
+		],
+		Interviewing: [],
+		notAMatch: [],
+		noResponse: [],
+		toBeHired: [],
+	},
 	isLoading: false,
 	message: '',
 };
@@ -31,7 +58,11 @@ export const getOneCandidate = createAsyncThunk(
 const candidateSlice = createSlice({
 	name: 'candidate',
 	initialState,
-	reducers: {},
+	reducers: {
+		addCandidateToBoard(state, action) {
+			state.board = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAllCandidates.pending, (state, action) => {
@@ -61,6 +92,6 @@ const candidateSlice = createSlice({
 	},
 });
 
-export const {} = candidateSlice.actions;
+export const { addCandidateToBoard } = candidateSlice.actions;
 
 export default candidateSlice.reducer;
