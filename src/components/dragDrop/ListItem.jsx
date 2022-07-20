@@ -1,5 +1,6 @@
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
+import useManageCandidate from '../../candidates/manage-candidates/useManageCandidate';
 
 const Avatar = styled.img`
 	height: 30px;
@@ -34,12 +35,14 @@ const DragItem = styled.div`
 	flex-direction: column;
 `;
 
-const ListItem = ({ item, index }) => {
+const ListItem = ({ item, index, prefix }) => {
+	const { deleteItem } = useManageCandidate();
 	return (
 		<Draggable draggableId={item.id} index={index}>
 			{(provided, snapshot) => {
 				return (
 					<DragItem
+						onDoubleClick={() => deleteItem(prefix, index)}
 						ref={provided.innerRef}
 						snapshot={snapshot}
 						{...provided.draggableProps}

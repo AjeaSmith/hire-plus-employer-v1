@@ -19,9 +19,17 @@ const DraggableElement = ({ prefix, elements }) => (
 		<Droppable droppableId={`${prefix}`}>
 			{(provided) => (
 				<div {...provided.droppableProps} ref={provided.innerRef}>
-					{elements.map((item, index) => (
-						<ListItem key={item.id} item={item} index={index} />
-					))}
+					{elements.map((item, index) => {
+						console.log(prefix, index);
+						return (
+							<ListItem
+								key={item.id}
+								item={item}
+								index={index}
+								prefix={prefix}
+							/>
+						);
+					})}
 					{provided.placeholder}
 				</div>
 			)}

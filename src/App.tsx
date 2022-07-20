@@ -20,7 +20,6 @@ function App() {
 		const unsubscribe = onAuthStateChangedListener(async (user) => {
 			if (user) {
 				const { displayName, uid } = user;
-				console.log(user);
 				dispatch(
 					setSignedIn({ signedIn: true, currentUser: { displayName, uid } })
 				);

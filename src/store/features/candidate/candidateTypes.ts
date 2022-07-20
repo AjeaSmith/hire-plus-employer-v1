@@ -25,6 +25,7 @@ type ProjectData = {
 };
 type ItemData = {
 	id: string;
+	column: string;
 	name: string;
 	occupation: string;
 	linkToProfile: string;

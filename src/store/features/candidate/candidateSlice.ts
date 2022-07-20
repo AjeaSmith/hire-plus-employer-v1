@@ -14,18 +14,21 @@ const initialState: candidateState = {
 		candidatesToReview: [
 			{
 				id: '1',
+				column: 'candidatesToReview',
 				name: 'James Steward',
 				occupation: 'Web Developer',
 				linkToProfile: 'https://www.google.com',
 			},
 			{
 				id: '2',
+				column: 'candidatesToReview',
 				name: 'Chris Michaels',
 				occupation: 'Front-end Developer',
 				linkToProfile: 'https://www.google.com',
 			},
 			{
 				id: '3',
+				column: 'candidatesToReview',
 				name: 'Tom Soho',
 				occupation: 'Software Engineer',
 				linkToProfile: 'https://www.google.com',
