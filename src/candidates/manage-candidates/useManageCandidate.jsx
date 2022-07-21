@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { v4 } from 'uuid';
 import { addCandidateToBoard } from '../../store/features/candidate/candidateSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -5,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 const useManageCandidate = () => {
 	const dispatch = useAppDispatch();
 	const { board } = useAppSelector((state) => state.candidate);
+	const [isCandidateAdded, setIsCandidateAdded] = useState(false);
 
 	const addNewCandidateToBoard = (displayName) => {
 		dispatch(
@@ -32,7 +34,7 @@ const useManageCandidate = () => {
 			})
 		);
 	};
-	return { addNewCandidateToBoard, deleteItem };
+	return { addNewCandidateToBoard, deleteItem, isCandidateAdded };
 };
 
 export default useManageCandidate;

@@ -33,7 +33,7 @@ const ViewCandidate = () => {
 						<div className="container mx-auto py-5 px-5 md:px-0 text-right text-white flex justify-between">
 							<div className="flex justify-center text-md text-slate-200">
 								{candidateObj.isForHire ? (
-									<p>Actively looking for work</p>
+									<p>Looking for work</p>
 								) : (
 									<p>Not currently looking for work</p>
 								)}
@@ -41,9 +41,27 @@ const ViewCandidate = () => {
 							<div className="flex justify-center text-md text-slate-200">
 								<button
 									type="button"
+									className="
+    								px-6
+    								py-2.5
+    								bg-indigo-600
+    								text-white
+    								font-medium
+    								text-xs
+    								leading-tight
+    								uppercase
+    								rounded
+    								shadow-md
+    								hover:bg-indigo-700 hover:shadow-lg
+    								focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0
+    								active:bg-blue-800 active:shadow-lg
+    								transition
+    								duration-150
+    								ease-in-out
+  									"
 									onClick={() => addNewCandidateToBoard(candidateObj.name)}
 								>
-									Add to Board
+									Add to your board
 								</button>
 							</div>
 						</div>

@@ -33,7 +33,6 @@ type ItemData = {
 export type TrelloBoardData = {
 	candidatesToReview: ItemData[];
 	Interviewing: ItemData[];
-	notAMatch: ItemData[];
 	noResponse: ItemData[];
 	toBeHired: ItemData[];
 };

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { v4 } from 'uuid';
 import { addCandidateToBoard } from '../../store/features/candidate/candidateSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
@@ -22,7 +20,6 @@ const useDropDrag = () => {
 	const lists = [
 		'candidatesToReview',
 		'Interviewing',
-		'notAMatch',
 		'noResponse',
 		'toBeHired',
 	];

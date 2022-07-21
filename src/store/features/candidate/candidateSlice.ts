@@ -35,7 +35,6 @@ const initialState: candidateState = {
 			},
 		],
 		Interviewing: [],
-		notAMatch: [],
 		noResponse: [],
 		toBeHired: [],
 	},
