@@ -6,8 +6,6 @@ import { useAppSelector } from '../../store/hooks';
 
 const DragDropContextContainer = styled.div`
 	padding: 20px;
-	border: 4px solid indianred;
-	border-radius: 6px;
 `;
 
 const ListGrid = styled.div`

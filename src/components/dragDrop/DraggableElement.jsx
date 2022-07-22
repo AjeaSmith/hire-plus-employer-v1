@@ -3,14 +3,14 @@ import ListItem from './ListItem';
 import styled from 'styled-components';
 
 const ColumnHeader = styled.div`
-	text-transform: uppercase;
+	// text-transform: uppercase;
 	margin-bottom: 20px;
 `;
 
 const DroppableStyles = styled.div`
 	padding: 10px;
 	border-radius: 6px;
-	background: #d4d4d4;
+	background: white;
 `;
 
 const DraggableElement = ({ prefix, elements }) => (

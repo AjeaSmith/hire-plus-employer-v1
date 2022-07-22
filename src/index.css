@@ -78,19 +78,19 @@ h2 {
 
 /* Hiring switch */
 .toggle-bg:after {
-    content: '';
-    @apply absolute top-0.5 left-0.5 bg-white border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
+	content: '';
+	@apply absolute top-0.5 left-0.5 bg-white border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
 }
 
 input:checked + .toggle-bg:after {
-    transform: translateX(100%);
-    @apply border-white;
+	transform: translateX(100%);
+	@apply border-white;
 }
 
 input:checked + .toggle-bg {
-    @apply bg-indigo-700 border-indigo-700;
+	@apply bg-indigo-700 border-indigo-700;
 }
 
-input::placeholder{
-	@apply text-slate-500
+input::placeholder {
+	@apply text-slate-500;
 }
