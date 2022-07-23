@@ -1,18 +1,8 @@
-import styled from 'styled-components';
+import { DragDropContextContainer, ListGrid } from './styles/Styled';
 import { DragDropContext } from 'react-beautiful-dnd';
 import DraggableElement from './DraggableElement';
 import useDropDrag from './useDropDrag';
 import { useAppSelector } from '../../store/hooks';
-
-const DragDropContextContainer = styled.div`
-	padding: 20px;
-`;
-
-const ListGrid = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 8px;
-`;
 
 function DragList() {
 	const { board } = useAppSelector((state) => state.candidate);
