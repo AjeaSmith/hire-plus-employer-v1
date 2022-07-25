@@ -28,11 +28,10 @@ type ItemData = {
 	column: string;
 	name: string;
 	occupation: string;
-	linkToProfile: string;
 };
-export type TrelloBoardData = {
+export interface TrelloBoardData {
 	candidatesToReview: ItemData[];
 	Interviewing: ItemData[];
 	noResponse: ItemData[];
 	toBeHired: ItemData[];
-};
+}

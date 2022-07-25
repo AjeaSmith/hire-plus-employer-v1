@@ -1,11 +1,5 @@
 import { Draggable } from 'react-beautiful-dnd';
-import {
-	DragItem,
-	CardHeader,
-	CardFooter,
-	Author,
-	Avatar,
-} from './styles/Styled';
+import { DragItem, CardHeader } from './styles/Styled';
 import useManageCandidate from '../../candidates/manage-candidates/useManageCandidate';
 
 const ListItem = ({ item, index, prefix }) => {
@@ -22,13 +16,7 @@ const ListItem = ({ item, index, prefix }) => {
 						{...provided.dragHandleProps}
 					>
 						<CardHeader>{item.name}</CardHeader>
-						<span>{item.occupation}</span>
-						<CardFooter>
-							<span>{item.linkToProfile}</span>
-							<Author>
-								<Avatar src="https://picsum.photos/200" />
-							</Author>
-						</CardFooter>
+						<span className='text-sm text-slate-300'>{item.occupation}</span>
 					</DragItem>
 				);
 			}}

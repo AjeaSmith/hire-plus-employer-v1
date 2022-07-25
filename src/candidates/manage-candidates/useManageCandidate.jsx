@@ -1,12 +1,22 @@
+import { useEffect } from 'react';
 import { v4 } from 'uuid';
-import { addCandidateToBoard } from '../../store/features/candidate/candidateSlice';
+import {
+	addCandidateToBoard,
+	getAllCandidates,
+} from '../../store/features/candidate/candidateSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const useManageCandidate = () => {
 	const dispatch = useAppDispatch();
-	const { board } = useAppSelector((state) => state.candidate);
-
+	const { board, candidates } = useAppSelector((state) => state.candidate);
+	useEffect(() => {
+		dispatch(getAllCandidates());
+	}, [dispatch]);
+	console.log(candidates);
 	const addNewCandidateToBoard = (displayName) => {
+		const findCandidateInfo = candidates.length
+			? candidates.find((val) => val.name === displayName)
+			: '';
 		dispatch(
 			addCandidateToBoard({
 				...board,
@@ -14,8 +24,9 @@ const useManageCandidate = () => {
 					{
 						id: v4(),
 						name: displayName,
-						occupation: 'a developer',
-						linkToProfile: 'https://www.google.com',
+						occupation: findCandidateInfo.headline
+							? findCandidateInfo.headline
+							: null,
 					},
 					...board.candidatesToReview,
 				],

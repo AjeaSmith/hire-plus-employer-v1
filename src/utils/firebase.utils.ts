@@ -171,13 +171,3 @@ export const getCandidates = async (): Promise<CandidateData[]> => {
 		return doc.data() as CandidateData;
 	});
 };
-export const getCandidate = async (id: string): Promise<CandidateData[]> => {
-	const collectionRef = collection(db, 'employees');
-	const q = query(collectionRef, where('id', '==', id));
-
-	const querySnapshot = await getDocs(q);
-
-	return querySnapshot.docs.map((docSnapshot) => {
-		return docSnapshot.data() as CandidateData;
-	});
-};
