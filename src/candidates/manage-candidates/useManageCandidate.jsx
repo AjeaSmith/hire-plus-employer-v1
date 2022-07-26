@@ -9,10 +9,11 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 const useManageCandidate = () => {
 	const dispatch = useAppDispatch();
 	const { board, candidates } = useAppSelector((state) => state.candidate);
+
 	useEffect(() => {
 		dispatch(getAllCandidates());
 	}, [dispatch]);
-	console.log(candidates);
+
 	const addNewCandidateToBoard = (displayName) => {
 		const findCandidateInfo = candidates.length
 			? candidates.find((val) => val.name === displayName)
@@ -43,6 +44,7 @@ const useManageCandidate = () => {
 			})
 		);
 	};
+	
 	return { addNewCandidateToBoard, deleteItem };
 };
 

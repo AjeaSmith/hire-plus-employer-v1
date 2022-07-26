@@ -1,7 +1,7 @@
 import DragList from '../../components/dragDrop/DragList';
 
-function ManageCandidates() {
+function TrelloBoardCandidates() {
 	return <DragList />;
 }
 
-export default ManageCandidates;
+export default TrelloBoardCandidates;

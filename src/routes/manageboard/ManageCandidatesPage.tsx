@@ -1,4 +1,4 @@
-import ManageCandidates from '../../candidates/manage-candidates/ManageCandidates';
+import ManageCandidates from '../../candidates/manage-candidates/TrelloBoardCandidates';
 
 const ManageCandidatesPage = () => {
 	return <ManageCandidates />;
