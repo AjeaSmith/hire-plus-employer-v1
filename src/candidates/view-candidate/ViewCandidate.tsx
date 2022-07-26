@@ -4,7 +4,7 @@ import { BeatLoader } from 'react-spinners';
 import { getAllCandidates } from '../../store/features/candidate/candidateSlice';
 import { CandidateData } from '../../store/features/candidate/candidateTypes';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import useManageCandidate from '../manage-candidates/useManageCandidate';
+import useManageCandidate from '../manage-candidates/useTrelloBoard';
 
 const ViewCandidate = () => {
 	const { id } = useParams();

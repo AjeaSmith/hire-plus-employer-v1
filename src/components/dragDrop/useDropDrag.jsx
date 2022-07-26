@@ -1,4 +1,4 @@
-import { addCandidateToBoard } from '../../store/features/candidate/candidateSlice';
+import { addCandidateToBoard, saveBoardData } from '../../store/features/candidate/candidateSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const useDropDrag = () => {
@@ -47,8 +47,10 @@ const useDropDrag = () => {
 
 		dispatch(addCandidateToBoard(listCopy));
 	};
-
-	return { onDragEnd, lists };
+	const saveBoard = () => {
+		dispatch(saveBoardData(board))
+	};
+	return { onDragEnd, lists, saveBoard };
 };
 
 export default useDropDrag;

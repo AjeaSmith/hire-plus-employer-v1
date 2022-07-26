@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCandidates } from '../../../utils/firebase.utils';
+import {
+	getCandidates,
+	getTrelloBoard,
+	saveTrelloBoard,
+} from '../../../utils/firebase.utils';
 import { CandidateData, TrelloBoardData } from './candidateTypes';
 
 interface candidateState {
@@ -11,26 +15,7 @@ interface candidateState {
 const initialState: candidateState = {
 	candidates: [],
 	board: {
-		candidatesToReview: [
-			{
-				id: '1',
-				column: 'candidatesToReview',
-				name: 'James Steward',
-				occupation: 'Web Developer',
-			},
-			{
-				id: '2',
-				column: 'candidatesToReview',
-				name: 'Chris Michaels',
-				occupation: 'Front-end Developer',
-			},
-			{
-				id: '3',
-				column: 'candidatesToReview',
-				name: 'Tom Soho',
-				occupation: 'Software Engineer',
-			},
-		],
+		candidatesToReview: [],
 		Interviewing: [],
 		noResponse: [],
 		toBeHired: [],
@@ -45,7 +30,19 @@ export const getAllCandidates = createAsyncThunk(
 		return JSON.stringify(candidates);
 	}
 );
-
+export const saveBoardData = createAsyncThunk(
+	'candidate/saveTrelloBoard',
+	async (board: TrelloBoardData) => {
+		await saveTrelloBoard(board);
+	}
+);
+export const getBoardData = createAsyncThunk(
+	'candidate/getTrelloBoard',
+	async () => {
+		const trelloBoardData = await getTrelloBoard();
+		return JSON.stringify(trelloBoardData);
+	}
+);
 const candidateSlice = createSlice({
 	name: 'candidate',
 	initialState,
@@ -56,17 +53,43 @@ const candidateSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(getAllCandidates.pending, (state, action) => {
+			.addCase(getAllCandidates.pending, (state) => {
 				state.isLoading = true;
 			})
 			.addCase(getAllCandidates.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.candidates = JSON.parse(action.payload);
 			})
-			.addCase(getAllCandidates.rejected, (state, action) => {
+			.addCase(getAllCandidates.rejected, (state) => {
 				state.isLoading = false;
 				state.message =
 					'There was an error loading the candidates page, try again later';
+			})
+			// ----------- SAVE BOARD ------------------
+			.addCase(saveBoardData.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(saveBoardData.fulfilled, (state) => {
+				state.isLoading = false;
+				state.message = 'Saved successfully';
+			})
+			.addCase(saveBoardData.rejected, (state) => {
+				state.isLoading = false;
+				state.message =
+					'There was an error saving trello board, try again later';
+			})
+			// ------------- GET BOARD --------------------
+			.addCase(getBoardData.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getBoardData.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.board = JSON.parse(action.payload);
+			})
+			.addCase(getBoardData.rejected, (state) => {
+				state.isLoading = false;
+				state.message =
+					'There was an error getting trello board, try again later';
 			});
 	},
 });

@@ -6,7 +6,7 @@ import {
 } from '../../store/features/candidate/candidateSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
-const useManageCandidate = () => {
+const useTrelloBoard = () => {
 	const dispatch = useAppDispatch();
 	const { board, candidates } = useAppSelector((state) => state.candidate);
 
@@ -48,4 +48,4 @@ const useManageCandidate = () => {
 	return { addNewCandidateToBoard, deleteItem };
 };
 
-export default useManageCandidate;
+export default useTrelloBoard;

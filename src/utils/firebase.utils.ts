@@ -30,7 +30,10 @@ import {
 	UpdateCompany,
 	Jobs,
 } from '../store/features/company/companyTypes';
-import { CandidateData } from '../store/features/candidate/candidateTypes';
+import {
+	CandidateData,
+	TrelloBoardData,
+} from '../store/features/candidate/candidateTypes';
 const firebaseConfig = {
 	apiKey: 'AIzaSyCg113wgJGlfL1T8B7SwVSO6a-UezmyAas',
 	authDomain: 'hireplus-268ed.firebaseapp.com',
@@ -104,6 +107,12 @@ export const createCompanyDocument = async (
 				companyDescription: '',
 				companyUrl: '',
 				email,
+				trelloBoard: {
+					candidatesToReview: [],
+					Interviewing: [],
+					noResponse: [],
+					toBeHired: [],
+				},
 				isHiring: false,
 				companySize: '',
 				companyType: '',
@@ -170,4 +179,22 @@ export const getCandidates = async (): Promise<CandidateData[]> => {
 		// doc.data() is never undefined for query doc snapshots
 		return doc.data() as CandidateData;
 	});
+};
+export const saveTrelloBoard = async (boardData: TrelloBoardData) => {
+	if (!auth.currentUser) return;
+
+	const docRef = doc(db, 'employers', auth.currentUser.uid);
+	const currentDocSnap = await getDoc(docRef);
+	await updateDoc(docRef, {
+		trelloBoard: boardData ? boardData : currentDocSnap.data().trelloBoard,
+	}).then(() => {
+		console.log('updated successfully');
+	});
+};
+export const getTrelloBoard = async (): Promise<TrelloBoardData> => {
+	if (!auth.currentUser) return;
+
+	const docRef = doc(db, 'employers', auth.currentUser.uid);
+	const trelloBoardDocSnap = await getDoc(docRef);
+	return trelloBoardDocSnap.data().trelloBoard as TrelloBoardData;
 };

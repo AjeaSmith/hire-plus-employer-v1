@@ -48,7 +48,15 @@ function App() {
 						}
 					/>
 					<Route path="view_candidate/:id" element={<ViewCandidate />} />
-					<Route path="manage/board" element={<ManageCandidatesPage />} />
+
+					<Route
+						path="manage/board"
+						element={
+							<PrivateRoute>
+								<ManageCandidatesPage />
+							</PrivateRoute>
+						}
+					/>
 				</Route>
 				<Route path="*" element={<NoMatch />} />
 			</Routes>

@@ -1,6 +1,6 @@
 import { Draggable } from 'react-beautiful-dnd';
 import { DragItem, CardHeader } from './styles/Styled';
-import useManageCandidate from '../../candidates/manage-candidates/useManageCandidate';
+import useManageCandidate from '../../candidates/manage-candidates/useTrelloBoard';
 
 const ListItem = ({ item, index, prefix }) => {
 	const { deleteItem } = useManageCandidate();

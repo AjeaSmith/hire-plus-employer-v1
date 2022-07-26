@@ -1,10 +1,9 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signoutUser } from '../../store/features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import logo from '../../assets/1.svg';
 
 const Navigation = () => {
-	const { employeeId } = useParams();
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { isSignedIn, currentUser } = useAppSelector((state) => state.auth);
@@ -64,11 +63,10 @@ const Navigation = () => {
 					</>
 				) : (
 					<nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-						{currentUser.uid === employeeId ? (
-							<Link to="/" className="mr-5 hover:text-gray-500">
-								Candidates
-							</Link>
-						) : null}
+						<Link to="/" className="mr-5 hover:text-gray-500">
+							Candidates
+						</Link>
+
 						<Link to="auth/employers" className="mr-5 hover:text-gray-500">
 							Sign In
 						</Link>

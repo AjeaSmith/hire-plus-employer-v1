@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
 import globeSVG from '../assets/globe.svg';
 import { CandidateData } from '../store/features/candidate/candidateTypes';
-import { useAppSelector } from '../store/hooks';
 import { truncateString } from '../utils/truncateString';
 
 interface CandidatesProps {
 	candidate: CandidateData;
 }
 const Candidates: React.FC<CandidatesProps> = ({ candidate }) => {
-	const { isSignedIn } = useAppSelector((state) => state.auth);
 	return (
 		<div className="p-4 lg:w-1/2">
 			<div className="h-full flex sm:flex-row flex-col sm:justify-start items-center justify-center text-center sm:text-left">
@@ -37,11 +35,6 @@ const Candidates: React.FC<CandidatesProps> = ({ candidate }) => {
 									<img src={globeSVG} alt="globe" className="w-5" />
 								</a>
 							</span>
-						) : null}
-						{isSignedIn ? (
-							<Link to="manage/board" className="text-indigo-500">
-								Add To Board
-							</Link>
 						) : null}
 					</div>
 				</div>
