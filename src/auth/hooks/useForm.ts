@@ -25,13 +25,11 @@ const useForm = (fields: Props) => {
 
 	const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
-		console.log(name, value);
 		setLoginInput({ ...loginInput, [name]: value });
 	};
 
 	const handleRegisterChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
-		console.log(name, value);
 		setRegisterInput({ ...registerInput, [name]: value });
 	};
 
