@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { BeatLoader } from 'react-spinners';
+import ViewExperience from '../../components/experience/ViewExperience';
+import ViewProject from '../../components/projects/ViewProject';
 import { getAllCandidates } from '../../store/features/candidate/candidateSlice';
 import { CandidateData } from '../../store/features/candidate/candidateTypes';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -140,12 +142,7 @@ const ViewCandidate = () => {
 									<ol className="border-l-2 border-indigo-700 mt-10">
 										{candidateObj.experience.map((exp, index) => {
 											return (
-												// <Experience
-												// 	experienceData={exp}
-												// 	key={index}
-												// 	itemIndex={index}
-												// />
-												<p>hi</p>
+												<ViewExperience experienceData={exp} key={index} />
 											);
 										})}
 									</ol>
@@ -165,15 +162,7 @@ const ViewCandidate = () => {
 								<div className="container py-5 mx-auto">
 									<div className="flex flex-wrap -m-4">
 										{candidateObj.projects.map((proj, index) => {
-											return (
-												<p>hi</p>
-												// <Project
-												// 	project={proj}
-												// 	key={index}
-												// 	itemIndex={index}
-												// 	removeItem={removeItem}
-												// />
-											);
+											return <ViewProject project={proj} key={index} />;
 										})}
 									</div>
 								</div>
